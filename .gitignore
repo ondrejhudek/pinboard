@@ -1,7 +1,6 @@
 .idea
-/.idea
-/.sass-cache
-/node_modules
-/src/main/app/bower_components
-/build
-/dist
+.sass-cache
+node_modules
+src/main/app/bower_components
+build
+dist
