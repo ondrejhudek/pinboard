@@ -1,6 +1,5 @@
-.idea
-.sass-cache
-node_modules
-src/main/app/bower_components
-build
-dist
+/.idea
+/.sass-cache
+/dist
+/build
+/node_modules
