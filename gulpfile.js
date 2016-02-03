@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload,
+    historyApiFallback = require('connect-history-api-fallback'),
     sass = require('gulp-ruby-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     del = require('del'),
@@ -47,7 +48,7 @@ bundler.transform('babelify', {
 //bundler.on('update', rebundle);
 bundler.on('log', gutil.log);
 
-function rebundle(){
+function rebundle() {
     return bundler.bundle()
         .on('error', gutil.log.bind(gutil, 'Browserify Error'))
         .pipe(source(PATH.outputMain))
@@ -59,10 +60,11 @@ function rebundle(){
 }
 
 // default task
-gulp.task('default', function () {});
+gulp.task('default', function () {
+});
 
 // clean cache files and output folder
-gulp.task('clean', function() {
+gulp.task('clean', function () {
     cache.clearAll();
     del.sync([PATH.outputStyles, PATH.outputScripts]);
 });
@@ -70,8 +72,12 @@ gulp.task('clean', function() {
 // localhost development server, including html, css and js code compiling
 gulp.task('serve', ['bundle'], function () {
     browserSync({
-        server: [PATH.output],
-        open: false
+        server: {
+            baseDir: PATH.output,
+            middleware: [
+                historyApiFallback()
+            ]
+        }
     });
 
     gulp.watch([PATH.html], ['html', reload]);

@@ -1,15 +1,19 @@
 import React from 'react'
-import { render } from 'react-dom'
-import { browserHistory, Router, Route } from 'react-router'
+import ReactDOM from 'react-dom'
+import { useRouterHistory } from 'react-router'
+import { createHistory } from 'history'
 
-import Home from '../views/Home'
-import Dashboard from '../views/Dashboard'
+import routes from '../routes'
+import Root from '../containers/Root'
+import configureStore from '../redux/configureStore'
 
-render((
-    <Router history={browserHistory}>
-        <Route path="/" component={Home}>
-            <Route path="home" component={Home} />
-            <Route path="dashboard" component={Dashboard} />
-        </Route>
-    </Router>
-), document.getElementById('app'))
+const historyConfig = { basename: '' };
+const history = useRouterHistory(createHistory)(historyConfig);
+
+const initialState = window.__INITIAL_STATE__;
+const store = configureStore(initialState);
+
+ReactDOM.render(
+    <Root history={history} routes={routes} store={store} />,
+    document.getElementById('app')
+);

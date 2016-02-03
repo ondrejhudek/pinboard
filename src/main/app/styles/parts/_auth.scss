@@ -1,0 +1,77 @@
+.login-box {
+    margin: auto;
+    padding: 0 0 20px;
+    width: 350px;
+    text-align: center;
+
+    header {
+        width: 100%;
+        background-color: $brand-blue;
+        text-align: left;
+
+        h2 {
+            margin: 0;
+            padding: 20px 30px;
+            color: #fff;
+            font-size: 22px;
+            font-weight: 500;
+        }
+    }
+
+    input {
+        width: 100%;
+    }
+
+    #error-message {
+        display: none;
+        background-color: #E57373 !important;
+        margin: 15px 15px -10px;
+
+        &.show {
+            display: block;
+        }
+    }
+
+    .btn-login {
+        margin-top: 30px;
+    }
+
+    .btn-forgot-pw {
+        margin-top: 10px;
+        font-weight: 400;
+    }
+}
+
+.logout-box {
+    margin: 50px auto 0;
+    padding: 10px 50px;
+    max-width: 500px;
+    text-align: center;
+
+    p {
+        font-weight: 500;
+    }
+}
+
+.lost-password-box {
+    margin: 50px auto 0;
+    padding: 10px 50px;
+    max-width: 600px;
+    text-align: center;
+
+    .btn-password {
+        margin: 35px 0 15px;
+
+        div {
+            height: 45px !important;
+
+            button {
+                span {
+                    padding: 0 25px !important;
+                    font-size: 16px !important;
+                    line-height: 45px !important;
+                }
+            }
+        }
+    }
+}
