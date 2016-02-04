@@ -26,13 +26,14 @@ const PATH = {
     html: 'src/main/app/index.html',
     appStyles: 'src/main/app/styles/**/*.scss',
     appScripts: 'src/main/app/scripts/**/*.js',
+    appImages: 'src/main/app/images/*',
     appMain: 'src/main/app/scripts/app.js',
     output: 'dist',
     outputHtml: 'dist/index.html',
     outputStyles: 'dist/styles',
     outputScripts: 'dist/scripts',
-    outputMain: 'app.js',
     outputImages: 'dist/images',
+    outputMain: 'app.js',
     testDir: 'src/test'
 };
 
@@ -57,7 +58,7 @@ function rebundle() {
         .pipe(source(PATH.outputMain))
         .pipe(gulp.dest(PATH.outputScripts))
         .pipe(size())
-        .on('end', function () {
+        .on('end', () => {
             reload();
         });
 }
@@ -69,7 +70,7 @@ gulp.task('default', () => {
 // clean cache files and output folder
 gulp.task('clean', () => {
     cache.clearAll();
-    del.sync([PATH.outputStyles, PATH.outputScripts, PATH.outputHtml]);
+    del.sync([PATH.output]);
 });
 
 // localhost development server, including html, css and js code compiling
@@ -109,8 +110,14 @@ gulp.task('styles', () => {
 // compile React JS and convert to output folder
 gulp.task('scripts', rebundle);
 
+// copy images to dist folder
+gulp.task('images', () => {
+    gulp.src(PATH.appImages)
+        .pipe(gulp.dest(PATH.outputImages));
+});
+
 // bundle
-gulp.task('bundle', ['html', 'styles', 'scripts']);
+gulp.task('bundle', ['html', 'styles', 'scripts', 'images']);
 
 // compress js files
 gulp.task('compress', () => {

@@ -1,13 +1,12 @@
 /** base **/
-@import "base";
-
-/** parts **/
-@import "parts/global";
-@import "parts/auth";
+@import "global/base";
+@import "global/global";
 
 /** components **/
 @import "components/sidebar";
 @import "components/menu";
+@import "components/material-ui";
 
 /** views **/
 @import "views/home";
+@import "views/auth";
