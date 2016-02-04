@@ -9,10 +9,36 @@
             color: #ffffff;
 
             small {
-                margin-left: -5px;
+                margin-left: 2px;
                 font-size: .4em;
                 font-weight: 400;
                 color: $brand-gray;
+            }
+        }
+    }
+
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 82px;
+        background-color: #fff;
+
+        p {
+            text-align: center;
+            font-size: .7em;
+
+            &.copyright .fa {
+                padding: 0 2px;
+                color: #B71C1C;
+            }
+
+            &.github a {
+                color: #888;
+
+                &:hover, &:focus {
+                    color: #333;
+                }
             }
         }
     }
