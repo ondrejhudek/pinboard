@@ -1,30 +1,34 @@
+'use strict';
+
 // load plugins
-var gulp = require('gulp'),
-    gutil = require('gulp-util'),
-    source = require('vinyl-source-stream'),
-    browserify = require('browserify'),
-    watchify = require('watchify'),
-    babelify = require('babelify'),
-    reactify = require('reactify'),
-    uglify = require('gulp-uglify'),
-    browserSync = require('browser-sync'),
-    reload = browserSync.reload,
-    historyApiFallback = require('connect-history-api-fallback'),
-    sass = require('gulp-ruby-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
-    del = require('del'),
-    cache = require('gulp-cache'),
-    size = require('gulp-size'),
-    useref = require('gulp-useref');
+import gulp from 'gulp';
+import gutil from 'gulp-util';
+import source from 'vinyl-source-stream';
+import browserify from 'browserify';
+import watchify from 'watchify';
+import babelify from 'babelify';
+import reactify from 'reactify';
+import uglify from 'gulp-uglify';
+import browserSync from 'browser-sync';
+import historyApiFallback from 'connect-history-api-fallback';
+import sass from 'gulp-ruby-sass';
+import autoprefixer from 'gulp-autoprefixer';
+import del from 'del';
+import cache from 'gulp-cache';
+import size from 'gulp-size';
+import useref from 'gulp-useref';
+
+const reload = browserSync.reload;
 
 // project paths
-var PATH = {
+const PATH = {
     app: 'src/main/app',
     html: 'src/main/app/index.html',
     appStyles: 'src/main/app/styles/**/*.scss',
     appScripts: 'src/main/app/scripts/**/*.js',
     appMain: 'src/main/app/scripts/app.js',
     output: 'dist',
+    outputHtml: 'dist/index.html',
     outputStyles: 'dist/styles',
     outputScripts: 'dist/scripts',
     outputMain: 'app.js',
@@ -33,7 +37,7 @@ var PATH = {
 };
 
 // bundler for react compiling
-var bundler = watchify(browserify({
+const bundler = watchify(browserify({
     entries: [PATH.appMain],
     debug: true,
     cache: {},
@@ -45,7 +49,6 @@ bundler.transform('babelify', {
     presets: ['es2015', 'react']
 });
 
-//bundler.on('update', rebundle);
 bundler.on('log', gutil.log);
 
 function rebundle() {
@@ -60,17 +63,17 @@ function rebundle() {
 }
 
 // default task
-gulp.task('default', function () {
+gulp.task('default', () => {
 });
 
 // clean cache files and output folder
-gulp.task('clean', function () {
+gulp.task('clean', () => {
     cache.clearAll();
-    del.sync([PATH.outputStyles, PATH.outputScripts]);
+    del.sync([PATH.outputStyles, PATH.outputScripts, PATH.outputHtml]);
 });
 
 // localhost development server, including html, css and js code compiling
-gulp.task('serve', ['bundle'], function () {
+gulp.task('serve', ['bundle'], () => {
     browserSync({
         server: {
             baseDir: PATH.output,
@@ -86,7 +89,7 @@ gulp.task('serve', ['bundle'], function () {
 });
 
 // convert index.html to output folder
-gulp.task('html', function () {
+gulp.task('html', () => {
     return gulp.src(PATH.html)
         .pipe(useref())
         .pipe(gulp.dest(PATH.output))
@@ -94,7 +97,7 @@ gulp.task('html', function () {
 });
 
 // compile SASS and convert to output folder
-gulp.task('styles', function () {
+gulp.task('styles', () => {
     return sass(PATH.appStyles, {
         style: 'expanded'
     })
@@ -110,7 +113,7 @@ gulp.task('scripts', rebundle);
 gulp.task('bundle', ['html', 'styles', 'scripts']);
 
 // compress js files
-gulp.task('compress', function () {
+gulp.task('compress', () => {
     return gulp.src('dist/js/*.js')
         .pipe(uglify())
         .pipe(gulp.dest('build/js'))
