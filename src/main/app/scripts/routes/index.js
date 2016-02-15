@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, IndexRoute, Redirect, Link } from 'react-router'
-import auth from '../auth/index'
+import auth from '../services/auth/index'
 
 import Layout from '../layouts/Layout'
 import Sidebar from '../components/Siderbar'
@@ -9,9 +9,13 @@ import HomeView from '../views/Home'
 import LostPasswordView from '../views/LostPassword'
 import DashboardView from '../views/Dashboard'
 import SampleView from '../views/Sample'
+import NoteView from '../views/Note'
+import TodoView from '../views/Todo'
+import EventView from '../views/Event'
 import NotFoundView from '../views/NotFound'
 import LogoutComponent from '../views/Logout'
 
+/*
 const App = React.createClass({
     getInitialState() {
         return {
@@ -39,6 +43,7 @@ const App = React.createClass({
         )
     }
 });
+*/
 
 function requireAuth(nextState, replace) {
     if (!auth.loggedIn()) {
@@ -57,7 +62,6 @@ function notRequireAuth(nextState, replace) {
         })
     }
 }
-
 export default (
     <Route path='/' component={Layout}>
         <IndexRoute component={DashboardView} onEnter={requireAuth}/>
@@ -66,7 +70,11 @@ export default (
         <Route path='lost-password' component={LostPasswordView} onEnter={notRequireAuth}/>
         <Route path='dashboard' component={DashboardView} onEnter={requireAuth}/>
         <Route path='sample' component={SampleView} onEnter={requireAuth}/>
+        <Route path='note' component={NoteView} onEnter={requireAuth}/>
+        <Route path='todo' component={TodoView} onEnter={requireAuth}/>
+        <Route path='event' component={EventView} onEnter={requireAuth}/>
         <Route path='404' component={NotFoundView}/>
         <Redirect from='*' to='/404'/>
     </Route>
 )
+

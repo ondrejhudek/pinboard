@@ -1,42 +1,46 @@
 import React from 'react';
 import { Card, CardHeader, TextField, FlatButton, RaisedButton } from 'material-ui'
 
-import auth from '../auth/index'
+import auth from '../services/auth/index'
 
 class Login extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             email: '',
             password: '',
             error: false,
             errorMsg: ''
-        };
+        }
 
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleLostPassword = this.handleLostPassword.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this)
+        this.handlePasswordChange = this.handlePasswordChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleLostPassword = this.handleLostPassword.bind(this)
+    }
+
+    componentDidMount() {
+        auth.loadUsers()
     }
 
     handleEmailChange(e) {
-        this.setState({email: e.target.value, error: false, errorMsg: ''});
+        this.setState({email: e.target.value, error: false, errorMsg: ''})
     }
 
     handlePasswordChange(e) {
-        this.setState({password: e.target.value, error: false, errorMsg: ''});
+        this.setState({password: e.target.value, error: false, errorMsg: ''})
     }
 
     handleSubmit(e) {
-        e.preventDefault();
+        e.preventDefault()
 
-        const userEmail = this.state.email.trim();
-        const userPassword = this.state.password.trim();
+        const userEmail = this.state.email.trim()
+        const userPassword = this.state.password.trim()
 
         if (!userEmail || !userPassword) {
             this.setState({error: true, errorMsg: 'emptyCredentials'});
-            return;
+            return
         }
 
         auth.login(userEmail, userPassword, (loggedIn) => {
@@ -44,7 +48,7 @@ class Login extends React.Component {
                 return this.setState({error: true, errorMsg: 'incorrectCredentials'})
             }
 
-            const location = this.props;
+            const location = this.props
 
             if (location.state && location.state.nextPathname) {
                 this.context.router.replace(location.state.nextPathname)
@@ -55,7 +59,7 @@ class Login extends React.Component {
     }
 
     handleLostPassword(){
-        const location = this.props;
+        const location = this.props
 
         if (location.state && location.state.nextPathname) {
             this.context.router.replace(location.state.nextPathname)
@@ -108,6 +112,6 @@ class Login extends React.Component {
 
 Login.contextTypes = {
     router: React.PropTypes.object.isRequired
-};
+}
 
 export default Login

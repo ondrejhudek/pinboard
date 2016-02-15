@@ -1,24 +1,24 @@
-'use strict';
+'use strict'
 
 // load plugins
-import gulp from 'gulp';
-import gutil from 'gulp-util';
-import source from 'vinyl-source-stream';
-import browserify from 'browserify';
-import watchify from 'watchify';
-import babelify from 'babelify';
-import reactify from 'reactify';
-import uglify from 'gulp-uglify';
-import browserSync from 'browser-sync';
-import historyApiFallback from 'connect-history-api-fallback';
-import sass from 'gulp-ruby-sass';
-import autoprefixer from 'gulp-autoprefixer';
-import del from 'del';
-import cache from 'gulp-cache';
-import size from 'gulp-size';
-import useref from 'gulp-useref';
+import gulp from 'gulp'
+import gutil from 'gulp-util'
+import source from 'vinyl-source-stream'
+import browserify from 'browserify'
+import watchify from 'watchify'
+import babelify from 'babelify'
+import reactify from 'reactify'
+import uglify from 'gulp-uglify'
+import browserSync from 'browser-sync'
+import historyApiFallback from 'connect-history-api-fallback'
+import sass from 'gulp-ruby-sass'
+import autoprefixer from 'gulp-autoprefixer'
+import del from 'del'
+import cache from 'gulp-cache'
+import size from 'gulp-size'
+import useref from 'gulp-useref'
 
-const reload = browserSync.reload;
+const reload = browserSync.reload
 
 // project paths
 const PATH = {
@@ -35,7 +35,7 @@ const PATH = {
     outputImages: 'dist/images',
     outputMain: 'app.js',
     testDir: 'src/test'
-};
+}
 
 // bundler for react compiling
 const bundler = watchify(browserify({
@@ -44,13 +44,13 @@ const bundler = watchify(browserify({
     cache: {},
     packageCache: {},
     fullPaths: true
-}));
+}))
 
 bundler.transform('babelify', {
     presets: ['es2015', 'react']
-});
+})
 
-bundler.on('log', gutil.log);
+bundler.on('log', gutil.log)
 
 function rebundle() {
     return bundler.bundle()
@@ -59,19 +59,19 @@ function rebundle() {
         .pipe(gulp.dest(PATH.outputScripts))
         .pipe(size())
         .on('end', () => {
-            reload();
-        });
+            reload()
+        })
 }
 
 // default task
 gulp.task('default', () => {
-});
+})
 
 // clean cache files and output folder
 gulp.task('clean', () => {
-    cache.clearAll();
-    del.sync([PATH.output]);
-});
+    cache.clearAll()
+    del.sync([PATH.output])
+})
 
 // localhost development server, including html, css and js code compiling
 gulp.task('serve', ['bundle'], () => {
@@ -82,20 +82,20 @@ gulp.task('serve', ['bundle'], () => {
                 historyApiFallback()
             ]
         }
-    });
+    })
 
-    gulp.watch([PATH.html], ['html', reload]);
-    gulp.watch([PATH.appStyles], ['styles', reload]);
-    gulp.watch([PATH.appScripts], ['scripts']);
-});
+    gulp.watch([PATH.html], ['html', reload])
+    gulp.watch([PATH.appStyles], ['styles', reload])
+    gulp.watch([PATH.appScripts], ['scripts'])
+})
 
 // convert index.html to output folder
 gulp.task('html', () => {
     return gulp.src(PATH.html)
         .pipe(useref())
         .pipe(gulp.dest(PATH.output))
-        .pipe(size());
-});
+        .pipe(size())
+})
 
 // compile SASS and convert to output folder
 gulp.task('styles', () => {
@@ -104,25 +104,25 @@ gulp.task('styles', () => {
     })
         .pipe(autoprefixer('last 1 version'))
         .pipe(gulp.dest(PATH.outputStyles))
-        .pipe(size());
-});
+        .pipe(size())
+})
 
 // compile React JS and convert to output folder
-gulp.task('scripts', rebundle);
+gulp.task('scripts', rebundle)
 
 // copy images to dist folder
 gulp.task('images', () => {
-    gulp.src(PATH.appImages)
-        .pipe(gulp.dest(PATH.outputImages));
-});
+    return gulp.src(PATH.appImages)
+        .pipe(gulp.dest(PATH.outputImages))
+})
 
 // bundle
-gulp.task('bundle', ['html', 'styles', 'scripts', 'images']);
+gulp.task('bundle', ['html', 'styles', 'scripts', 'images'])
 
 // compress js files
 gulp.task('compress', () => {
     return gulp.src('dist/js/*.js')
         .pipe(uglify())
         .pipe(gulp.dest('build/js'))
-        .pipe(size());
-});
+        .pipe(size())
+})
