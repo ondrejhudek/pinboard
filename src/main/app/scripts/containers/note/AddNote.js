@@ -23,7 +23,6 @@ let AddNote = ({ dispatch }) => {
 
         if (!value) return
         dispatch(fetchCreate(value))
-        //dispatch(addNote(value, ''))
         e.target.newNote.value = ''
     }
 

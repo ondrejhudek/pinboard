@@ -55,6 +55,7 @@ export const fetchCreate = (title) => {
 }
 
 export const updateNote = (id, objectId, title, body) => {
+    console.log(id + " | " + objectId + " | " + title + " | " + body)
     fetchUpdate(objectId, title, body)
     return {
         type: 'UPDATE_NOTE',
@@ -71,7 +72,7 @@ const fetchUpdate = (objectId, title, body) => {
         body: JSON.stringify({ event: 'UPDATE', data: { id: objectId, title: title, body: body } })
     })
         .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
-        .then(text => text)
+        .then(text => console.log(text))
         .catch(err => console.log(err))
 }
 

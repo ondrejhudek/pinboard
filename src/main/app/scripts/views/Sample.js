@@ -51,7 +51,7 @@ class SampleView extends React.Component {
         fetch(API_NOTES, {
             method: 'POST',
             headers: API_HEADER,
-            body: JSON.stringify({ event: 'UPDATE', data: { id: '56c11c97b8c643a80271f6a6', title: 'Test 5', body: 'Test 5' } })
+            body: JSON.stringify({ event: 'UPDATE', data: { id: '56d973993d29d2600b86d02b', title: 'Test 5', body: 'Test 5' } })
         })
             .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
             .then(text => console.log(text))

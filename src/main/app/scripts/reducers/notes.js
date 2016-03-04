@@ -1,5 +1,4 @@
 const getModel = (model) => {
-    console.log(model)
     return ({
         id: model.id,
         _id: model._id,
