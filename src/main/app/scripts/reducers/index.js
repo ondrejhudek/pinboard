@@ -1,12 +1,15 @@
 import { combineReducers } from 'redux'
-import { routeReducer as router } from 'react-router-redux'
+import { routeReducer } from 'react-router-redux'
+
 import todos from './todos'
 import visibilityFilter from './visibilityFilter'
+import notes from './notes'
 
-const todoApp = combineReducers({
+const rootReducer = combineReducers({
+    notes,
     todos,
-    visibilityFilter
+    visibilityFilter,
+    routing: routeReducer
 })
 
-export default todos
-export default visibilityFilter
+export default rootReducer

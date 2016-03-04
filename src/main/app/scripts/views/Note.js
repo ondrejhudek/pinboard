@@ -1,18 +1,15 @@
 import React from 'react'
-import { GridList, GridTile, Card, CardHeader, CardTitle, CardText, TextField   } from 'material-ui'
+import { Card, CardText } from 'material-ui'
+
+import AddNote from '../containers/note/AddNote'
+import Notes from '../components/note/Notes'
 
 const style = {
-    gridTile: {
-        width: '33.3%',
-        border: '1px solid #eee',
-        borderRadius: 2
+    headerCard: {
+        margin: '0 20% 1em'
     },
-    card: {},
-    title: {
-       paddingBottom: 0
-    },
-    body: {
-        paddingTop: 0
+    headerCardText: {
+        padding: '3px 17px'
     }
 }
 
@@ -26,13 +23,11 @@ class NoteView extends React.Component {
             <div className="state-todo">
                 <h2>Notes</h2>
 
-                <GridTile style={style.gridTile}>
-                    <Card style={style.card}>
-                        <CardTitle children={<TextField hintText="Note title" fullWidth={true}/>} style={style.title}/>
+                <Card style={style.headerCard}>
+                    <CardText children={<AddNote />} style={style.headerCardText}/>
+                </Card>
 
-                        <CardText children={<TextField fullWidth={true} multiLine={true} rows={4} floatingLabelText="Write your note here..."/>} style={style.body}/>
-                    </Card>
-                </GridTile>
+                <Notes/>
             </div>
         )
     }

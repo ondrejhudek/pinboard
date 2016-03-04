@@ -1,4 +1,4 @@
-/** DB configuration */
+/** DB CONFIGURATION **/
 const DB_HOST = 'ds053295.mongolab.com:53295'
 const DB_NAME = 'hudy-app-db'
 const DB_USER = 'hudy'
@@ -14,5 +14,5 @@ export const API_NOTES = API_ENDPOINT + '/notes'
 export const API_HEADER = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
 
 /** GLOBAL VARIABLES **/
-export const __DEBUG = true
+export const __DEBUG = false
 export const __ENV = 'dev'

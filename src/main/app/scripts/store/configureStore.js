@@ -1,29 +1,28 @@
-import { applyMiddleware, compose, createStore, combineReducers } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import { browserHistory } from 'react-router'
-import { syncHistory, routeReducer } from 'react-router-redux'
+import { syncHistory } from 'react-router-redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
 
 import DevTools from './../containers/DevTools'
-import todos from '../reducers/todos'
-import visibilityFilter from '../reducers/visibilityFilter'
-import notes from '../reducers/notes'
+import rootReducer from '../reducers'
+import { fetchNotes } from '../actions'
 
+const loggerMiddleware = createLogger()
 const middleware = syncHistory(browserHistory)
-const reducer = combineReducers({
-    todos,
-    visibilityFilter,
-    notes,
-    routing: routeReducer
-})
 
 const finalCreateStore = compose(
-    applyMiddleware(middleware),
+    applyMiddleware(
+        middleware,
+        thunkMiddleware,
+        loggerMiddleware
+    ),
     DevTools.instrument()
 )(createStore)
 
-const store = finalCreateStore(reducer)
+const store = finalCreateStore(rootReducer)
 middleware.listenForReplays(store)
 
-export default store
+store.dispatch(fetchNotes())
 
-//import fetchDatabase from './fetchDatabase'
-//export default fetchDatabase(store)
+export default store

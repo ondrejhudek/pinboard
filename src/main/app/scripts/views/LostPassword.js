@@ -6,25 +6,25 @@ import auth from '../services/auth/index'
 
 class LostPassword extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             autoHideDuration: 5000,
             message: 'Guest credentials are "guest@guest.com/guest".',
             open: false
-        };
+        }
 
-        this.handleOpenCredentials = this.handleOpenCredentials.bind(this);
-        this.handleCloseCredentials = this.handleCloseCredentials.bind(this);
-    };
+        this.handleOpenCredentials = this.handleOpenCredentials.bind(this)
+        this.handleCloseCredentials = this.handleCloseCredentials.bind(this)
+    }
 
     handleOpenCredentials() {
-        this.setState({open: true});
-    };
+        this.setState({open: true})
+    }
 
     handleCloseCredentials() {
-        this.setState({open: false});
-    };
+        this.setState({open: false})
+    }
 
     render() {
         return (
@@ -49,4 +49,4 @@ class LostPassword extends React.Component {
     }
 }
 
-    export default LostPassword
+export default LostPassword

@@ -1,5 +1,5 @@
 import React from 'react'
-import fetch from 'isomorphic-fetch'
+import 'isomorphic-fetch'
 
 import { API_NOTES, API_HEADER } from '../../../../../config'
 
@@ -22,7 +22,7 @@ class SampleView extends React.Component {
         fetch(API_NOTES, {
             method: 'POST',
             headers: API_HEADER,
-            body: JSON.stringify({ event: 'CREATE', data: { userId: '', title: 'Test', body: 'Test'} })
+            body: JSON.stringify({ event: 'CREATE', data: { userId: '0', title: 'Test000', body: 'Test000'} })
         })
             .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
             .then(text => console.log(text))

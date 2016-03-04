@@ -74,6 +74,7 @@ gulp.task('clean', () => {
 })
 
 // localhost development server, including html, css and js code compiling
+// babel-node --debug --presets es2015 server/index.js
 gulp.task('serve', ['bundle'], () => {
     browserSync({
         server: {

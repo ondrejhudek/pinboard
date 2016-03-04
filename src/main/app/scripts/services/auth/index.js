@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+
 import { API_USERS } from '../../../../../../config'
 
 let users = {}
@@ -35,6 +36,10 @@ export default {
 
     getToken() {
         return localStorage.token
+    },
+
+    getUserId() {
+        return localStorage.userId
     },
 
     logout(cb) {

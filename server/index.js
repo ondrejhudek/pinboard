@@ -4,7 +4,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 import { getAllUsers, getUserByEmail, createUser, updateUser } from './controllers/User'
-import { getAllNotes, getNote, createNote, updateNote, removeNote } from './controllers/Note'
+import { getAllNotes, getNotes, getNote, createNote, updateNote, removeNote } from './controllers/Note'
 import { getAllTodos, getTodo, createTodo, updateTodo, removeTodo } from './controllers/Todo'
 
 import { DB_ENDPOINT } from '../config'
@@ -55,6 +55,10 @@ app.post('/api/notes', (req, res) =>  {
 
     switch(eventType){
         case 'GET':
+            getNotes(res, req.body.data)
+            break
+
+        case 'GET_ONE':
             getNote(res, req.body.data)
             break
 

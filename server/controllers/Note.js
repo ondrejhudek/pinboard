@@ -11,6 +11,19 @@ export const getAllNotes = (res) => {
     })
 }
 
+export const getNotes = (res, data) => {
+    Note.find({
+        'user_id': data.userId
+    }, (err, note) => {
+        if (err) {
+            console.log(err)
+            res.status(400).send(err)
+        }
+
+        res.json(note)
+    })
+}
+
 export const getNote = (res, data) => {
     Note.findById(data.id, (err, note) => {
         if (err) {
@@ -26,17 +39,17 @@ export const createNote = (res, data) => {
     const newNote = new Note({
         user_id: data.userId,
         title: data.title,
-        body: data.body
+        body: (data.body) ? data.body : ''
     })
 
-    newNote.save((err) => {
+    newNote.save((err, note) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
-    })
 
-    res.status(200).send('OK')
+        res.status(200).send(note._id)
+    })
 }
 
 export const updateNote = (res, data) => {
