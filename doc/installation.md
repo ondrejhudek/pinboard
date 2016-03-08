@@ -1,3 +1,0 @@
-# Installation
-
-Follow installation steps
