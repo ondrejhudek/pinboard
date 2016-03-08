@@ -10,12 +10,12 @@ const style = {
     }
 }
 
-let AddTodoItem = ({ dispatch, id }) => {
+let AddTodoItem = ({ dispatch, id, objectId }) => {
     const handleAdd = (e) => {
         const value = e.target.value.trim()
 
         if(!value) return
-        dispatch(addTodoItem(id, value))
+        dispatch(addTodoItem(id, objectId, value))
         e.target.value = ''
     }
 
@@ -27,7 +27,8 @@ let AddTodoItem = ({ dispatch, id }) => {
 }
 
 AddTodoItem.propTypes = {
-    id: PropTypes.number.isRequired
+    id: PropTypes.number.isRequired,
+    objectId: PropTypes.string.isRequired
 }
 
 AddTodoItem = connect()(AddTodoItem)

@@ -25,12 +25,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleToggle: (todoId, todoItemId) => {
-            dispatch(toggleTodoItem(todoId, todoItemId))
+        handleToggle: (todoId, objectId, todoItemId, completed) => {
+            dispatch(toggleTodoItem(todoId, objectId, todoItemId, completed))
         },
-        handleRemove: (e, todoId, todoItemId) => {
+        handleRemove: (e, todoId, objectId, todoItemId) => {
             e.preventDefault()
-            dispatch(removeTodoItem(todoId, todoItemId))
+            dispatch(removeTodoItem(todoId, objectId, todoItemId))
         }
     }
 }

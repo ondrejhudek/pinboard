@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 
 import { getAllUsers, getUserByEmail, createUser, updateUser } from './controllers/User'
 import { getAllNotes, getNotes, getNote, createNote, updateNote, removeNote } from './controllers/Note'
-import { getAllTodos, getTodos, getTodo, createTodo, updateTodo, removeTodo } from './controllers/Todo'
+import { getAllTodos, getTodos, getTodo, createTodo, updateTodo, removeTodo, addItem, toggleItem, removeItem } from './controllers/Todo'
 
 import { DB_ENDPOINT } from '../config'
 
@@ -101,12 +101,20 @@ app.post('/api/todos', (req, res) => {
             createTodo(res, req.body.data)
             break
 
-        case 'UPDATE':
-            updateTodo(res, req.body.data)
-            break
-
         case 'REMOVE':
             removeTodo(res, req.body.data)
+            break
+
+        case 'ADD_ITEM':
+            addItem(res, req.body.data)
+            break
+
+        case 'TOGGLE_ITEM':
+            toggleItem(res, req.body.data)
+            break
+
+        case 'REMOVE_ITEM':
+            removeItem(res, req.body.data)
             break
 
         default:

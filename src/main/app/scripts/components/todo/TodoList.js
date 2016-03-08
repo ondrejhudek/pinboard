@@ -2,11 +2,11 @@ import React, { PropTypes } from 'react'
 
 import TodoListItem from './TodoListItem'
 
-const TodoList = ({ id, todos, handleToggle, handleRemove }) => {
+const TodoList = ({ id, objectId, todos, handleToggle, handleRemove }) => {
     return (
         <div>
             {todos.map(todo =>
-                <TodoListItem key={todo.id} {...todo} handleToggle={() => handleToggle(id, todo.id)} handleRemove={(e) => handleRemove(e, id, todo.id)}/>
+                <TodoListItem key={todo.id} {...todo} handleToggle={() => handleToggle(id, objectId, todo.id, !todo.completed)} handleRemove={(e) => handleRemove(e, id, objectId, todo.id)}/>
             )}
         </div>
     )
@@ -14,8 +14,9 @@ const TodoList = ({ id, todos, handleToggle, handleRemove }) => {
 
 TodoList.propTypes = {
     id: PropTypes.number.isRequired,
+    objectId: PropTypes.string.isRequired,
     todos: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         completed: PropTypes.bool.isRequired,
         text: PropTypes.string.isRequired
     }).isRequired).isRequired,

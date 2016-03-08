@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import { GridTile, List, ListItem } from 'material-ui'
-import { connect } from 'react-redux'
 
 import VisibleTodoList from '../../containers/todo/VisibleTodoList'
 import AddTodoItem from '../../containers/todo/AddTodoItem'
@@ -28,11 +27,11 @@ const style = {
     }
 }
 
-let Todo = ({ dispatch, id, _id, todos, filter }) => {
+const Todo = ({ id, _id, todos, filter }) => {
     return (
         <GridTile style={style.gridTile}>
-            <List subheader={<AddTodoItem id={id}/>} subheaderStyle={style.subheader}>
-                <VisibleTodoList id={id} filter={filter} items={todos} />
+            <List subheader={<AddTodoItem id={id} objectId={_id}/>} subheaderStyle={style.subheader}>
+                <VisibleTodoList id={id} objectId={_id} filter={filter} items={todos} />
                 <ListItem children={<Footer key={id} id={id} objectId={_id} filter={filter}/>} disabled={true} style={style.footer}/>
             </List>
         </GridTile>
@@ -43,13 +42,11 @@ Todo.propTypes = {
     id: PropTypes.number.isRequired,
     _id: PropTypes.string.isRequired,
     todos: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         completed: PropTypes.bool.isRequired,
         text: PropTypes.string.isRequired
     })).isRequired,
     filter: PropTypes.string.isRequired
 }
-
-Todo = connect()(Todo)
 
 export default Todo

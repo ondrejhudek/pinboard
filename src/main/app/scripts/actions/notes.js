@@ -5,7 +5,10 @@ import auth from '../services/auth/index'
 
 let nextNoteId = 0
 
-/** notes **/
+/**
+ * NOTES
+ */
+/* request and receive notes */
 const requestNotes = () => {
     return {
         type: 'REQUEST_NOTES'
@@ -37,6 +40,7 @@ export const fetchNotes = () => {
     }
 }
 
+/* add note */
 const addNote = (objectId, title, body) => {
     return {
         type: 'ADD_NOTE',
@@ -64,6 +68,7 @@ export const fetchCreate = (title) => {
     }
 }
 
+/* update note */
 export const updateNote = (id, objectId, title, body) => {
     fetchUpdate(objectId, title, body)
     return {
@@ -88,6 +93,7 @@ const fetchUpdate = (objectId, title, body) => {
         .catch(err => console.log(err))
 }
 
+/* remove note */
 export const removeNote = (id, objectId) => {
     fetchRemove(objectId)
     return {

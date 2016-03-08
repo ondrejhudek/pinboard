@@ -1,10 +1,8 @@
-let todoItemId = 0
-
 const getTodoItemModel = (model) => {
     return ({
-        id: (model.id) ? model.id : todoItemId++,
+        id: model.id,
         text: model.text,
-        completed: (model.completed) ? model.completed : false
+        completed: (typeof model.completed === 'boolean') ? model.completed : false
     })
 }
 
@@ -15,7 +13,7 @@ const todoItem = (state, action) => {
 
         case 'TOGGLE_TODO_ITEM':
             return Object.assign({}, state, {
-                completed: !state.completed
+                completed: action.todo.completed
             })
 
         default:
@@ -29,7 +27,7 @@ const getTodoModel = (model) => {
         _id: model._id,
         userId: model.user_id,
         filter: 'SHOW_ALL',
-        todos: (model.todos) ? model.todos.map(t => getTodoItemModel(t)) : []
+        todos: model.todos.map(t => getTodoItemModel(t))
     })
 }
 
@@ -51,7 +49,7 @@ const todo = (state, action) => {
 
         //todos items
         case 'ADD_TODO_ITEM':
-            if (state.id !== action.todo.id) return state
+            if (state.id !== action.todo.todoId) return state
 
             return Object.assign({}, state, {
                 todos: [...state.todos, todoItem(undefined, action)]

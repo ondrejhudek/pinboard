@@ -1,9 +1,14 @@
 import 'isomorphic-fetch'
+import shortid from 'shortid'
 
 import { API_TODOS, API_HEADER } from '../../../../../config'
 import auth from '../services/auth/index'
 
 let nextTodoId = 0
+
+const generateTodoItemId = () => {
+    return shortid.generate()
+}
 
 /**
  * TODOS
@@ -47,7 +52,8 @@ const addTodo = (objectId) => {
         todo: {
             id: nextTodoId++,
             _id: objectId,
-            user_id: auth.getUserId()
+            user_id: auth.getUserId(),
+            todos: []
         },
         date: Date.now()
     }
@@ -105,44 +111,62 @@ export const setVisibilityFilter = (todoId, filter) => {
  * TODOS ITEMS
  */
 /* add todo item */
-export const addTodoItem = (todoId, text) => {
-    fetchAddItem(todoId, text)
+export const addTodoItem = (todoId, objectId, text) => {
+    const itemId = generateTodoItemId()
+
+    fetchAddItem(objectId, itemId, text)
     return {
         type: 'ADD_TODO_ITEM',
         todo: {
-            id: todoId,
+            todoId,
+            id: itemId,
             text
         },
         date: Date.now()
     }
 }
 
-const fetchAddItem = (todoId, text) => {
-    console.log(todoId + " | " + text)
-    return true
+const fetchAddItem = (objectId, itemId, text) => {
+    return fetch(API_TODOS, {
+        method: 'POST',
+        headers: API_HEADER,
+        body: JSON.stringify({event: 'ADD_ITEM', data: {id: objectId, todo: {id: itemId, text: text, completed: false}}})
+    })
+        .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
+        .then(text => text)
+        .catch(err => console.log(err))
 }
 
 /* toggle todo item */
-export const toggleTodoItem = (todoId, todoItemId) => {
-    fetchToggleItem(todoId, todoItemId)
+export const toggleTodoItem = (todoId, objectId, todoItemId, completed) => {
+    fetchToggleItem(objectId, todoItemId, completed)
     return {
         type: 'TOGGLE_TODO_ITEM',
         todo: {
             id: todoId,
-            itemId: todoItemId
+            itemId: todoItemId,
+            completed
         },
         date: Date.now()
     }
 }
 
-const fetchToggleItem = (todoId, todoItemId) => {
-    console.log(todoId + " | " + todoItemId)
-    return true
+const fetchToggleItem = (objectId, todoItemId, completed) => {
+    console.log(objectId + " | " + todoItemId + " | " + completed)
+
+    return fetch(API_TODOS, {
+        method: 'POST',
+        headers: API_HEADER,
+        body: JSON.stringify({event: 'TOGGLE_ITEM', data: {id: objectId, todo: {id: todoItemId, completed}}})
+    })
+        .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
+        .then(text => text)
+        .catch(err => console.log(err))
 }
 
 /* remove todo item */
-export const removeTodoItem = (todoId, todoItemId) => {
-    fetchRemoveItem(todoId, todoItemId)
+export const removeTodoItem = (todoId, objectId, todoItemId) => {
+    fetchRemoveItem(objectId, todoItemId)
     return {
         type: 'REMOVE_TODO_ITEM',
         todo: {
@@ -153,7 +177,15 @@ export const removeTodoItem = (todoId, todoItemId) => {
     }
 }
 
-const fetchRemoveItem = (todoId, todoItemId) => {
-    console.log(todoId + " | " + todoItemId)
-    return true
+const fetchRemoveItem = (objectId, todoItemId) => {
+    console.log(objectId + " | " + todoItemId)
+
+    return fetch(API_TODOS, {
+        method: 'POST',
+        headers: API_HEADER,
+        body: JSON.stringify({event: 'REMOVE_ITEM', data: {id: objectId, todo: {id: todoItemId}}})
+    })
+        .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
+        .then(text => text)
+        .catch(err => console.log(err))
 }
