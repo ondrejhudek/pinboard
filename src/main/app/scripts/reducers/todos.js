@@ -11,7 +11,7 @@ const getTodoItemModel = (model) => {
 const todoItem = (state, action) => {
     switch (action.type) {
         case 'ADD_TODO_ITEM':
-            return getTodoItemModel(action)
+            return getTodoItemModel(action.todo)
 
         case 'TOGGLE_TODO_ITEM':
             return Object.assign({}, state, {
@@ -29,39 +29,53 @@ const getTodoModel = (model) => {
         _id: model._id,
         userId: model.user_id,
         filter: 'SHOW_ALL',
-        todos: model.todos.map(t => getTodoItemModel(t))
+        todos: (model.todos) ? model.todos.map(t => getTodoItemModel(t)) : []
     })
 }
 
 const todo = (state, action) => {
     switch (action.type) {
+        // todos
+        case 'RECEIVE_TODOS':
+            return getTodoModel(state)
+
+        case 'ADD_TODO':
+            return getTodoModel(action.todo)
+
+        case 'SET_VISIBILITY_FILTER':
+            if (state.id !== action.todo.id) return state
+
+            return Object.assign({}, state, {
+                filter: action.filter
+            })
+
+        //todos items
         case 'ADD_TODO_ITEM':
-            if (state.id !== action.todoId) return state
+            if (state.id !== action.todo.id) return state
 
             return Object.assign({}, state, {
                 todos: [...state.todos, todoItem(undefined, action)]
             })
 
         case 'TOGGLE_TODO_ITEM':
-            if (state.id !== action.todoId) return state
+            if (state.id !== action.todo.id) return state
 
             return Object.assign({}, state, {
                 todos: state.todos.map(t => {
-                    if (t.id !== action.todoItemId) return t
+                    if (t.id !== action.todo.itemId) return t
 
                     return todoItem(t, action)
                 })
             })
 
-        case 'SET_VISIBILITY_FILTER':
-            if (state.id !== action.todoId) return state
+        case 'REMOVE_TODO_ITEM':
+            if (state.id !== action.todo.id) return state
 
             return Object.assign({}, state, {
-                filter: action.filter
+                todos: state.todos.filter(t => {
+                    return (t.id !== action.todo.itemId)
+                })
             })
-
-        case 'RECEIVE_TODOS':
-            return getTodoModel(state)
 
         default:
             return state
@@ -70,24 +84,7 @@ const todo = (state, action) => {
 
 const todos = (state = {isFetching: false, items: []}, action) => {
     switch (action.type) {
-        case 'ADD_TODO_ITEM':
-            return Object.assign({}, state, {
-                items: state.items.map(t => todo(t, action)),
-                lastUpdated: action.date
-            })
-
-        case 'TOGGLE_TODO_ITEM':
-            return Object.assign({}, state, {
-                items: state.items.map(t => todo(t, action)),
-                lastUpdated: action.date
-            })
-
-        case 'SET_VISIBILITY_FILTER':
-            return Object.assign({}, state, {
-                items: state.items.map(t => todo(t, action)),
-                lastUpdated: action.date
-            })
-
+        // todos
         case 'REQUEST_TODOS':
             return Object.assign({}, state, {
                 isFetching: true
@@ -98,6 +95,45 @@ const todos = (state = {isFetching: false, items: []}, action) => {
                 isFetching: false,
                 items: action.items.map(t => todo(t, action)),
                 lastUpdated: action.receivedAt
+            })
+
+        case 'ADD_TODO':
+            return Object.assign({}, state, {
+                items: [...state.items, todo(state, action)],
+                lastUpdated: action.date
+            })
+
+        case 'REMOVE_TODO':
+            return Object.assign({}, state, {
+                items: state.items.filter(t => {
+                    return (t.id !== action.todo.id)
+                }),
+                lastUpdated: action.date
+            })
+
+        case 'SET_VISIBILITY_FILTER':
+            return Object.assign({}, state, {
+                items: state.items.map(t => todo(t, action)),
+                lastUpdated: action.date
+            })
+
+        // todos items
+        case 'ADD_TODO_ITEM':
+            return Object.assign({}, state, {
+                items: state.items.map(t => todo(t, action)),
+                lastUpdated: action.date
+            })
+
+        case 'TOGGLE_TODO_ITEM':
+            return Object.assign({}, state, {
+                items: state.items.map(t => todo(t, action)),
+                lastUpdated: action.date
+            })
+
+        case 'REMOVE_TODO_ITEM':
+            return Object.assign({}, state, {
+                items: state.items.map(t => todo(t, action)),
+                lastUpdated: action.date
             })
 
         default:

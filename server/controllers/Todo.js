@@ -41,14 +41,14 @@ export const createTodo = (res, data) => {
         todos: []
     })
 
-    newTodo.save((err) => {
+    newTodo.save((err, todo) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
-    })
 
-    res.status(200).send('OK')
+        res.status(200).send(todo._id)
+    })
 }
 
 export const updateTodo = (res, data) => {

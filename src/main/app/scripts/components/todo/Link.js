@@ -5,8 +5,7 @@ const style = {
     button: {
         minWidth: 'auto',
         height: 'auto',
-        marginLeft: 5,
-        marginRight: 5
+        margin: '5px 5px 0 5px'
     },
     buttonLabel: {
         padding: 10,

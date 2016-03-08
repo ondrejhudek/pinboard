@@ -5,7 +5,7 @@ import CircularProgress from 'material-ui/lib/circular-progress'
 import Todo from './Todo'
 
 let Todos = ({ todos, isFetching }) => {
-    //todos.sort((a, b) => { return b.id - a.id })
+    todos.sort((a, b) => { return b.id - a.id })
 
     return (
         <div>
@@ -29,7 +29,6 @@ let Todos = ({ todos, isFetching }) => {
 Todos.propTypes = {
     todos: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
-        _id: PropTypes.string.isRequired,
         todos: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.number.isRequired,
             completed: PropTypes.bool.isRequired,

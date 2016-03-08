@@ -5,6 +5,7 @@ import auth from '../services/auth/index'
 
 let nextNoteId = 0
 
+/** notes **/
 const requestNotes = () => {
     return {
         type: 'REQUEST_NOTES'

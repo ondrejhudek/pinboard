@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { ListItem, Checkbox, IconButton } from 'material-ui'
+import RemoveIcon from 'material-ui/lib/svg-icons/content/clear'
 
 const style = {
     listItem: {
@@ -7,16 +8,16 @@ const style = {
     }
 }
 
-const TodoListItem = ({ handleClick, completed, text }) => {
-    return (
-        <ListItem primaryText={text} innerDivStyle={style.listItem} leftCheckbox={<Checkbox checked={completed} onClick={handleClick}/>}/>
-    )
-}
+const TodoListItem = ({ text, completed, handleToggle, handleRemove }) => (
+    <ListItem primaryText={text} innerDivStyle={style.listItem} leftCheckbox={<Checkbox checked={completed} onClick={handleToggle}/>}
+              rightIconButton={<RemoveIcon onClick={handleRemove} className="item-removeButton" hoverColor="#E91E63"/>}/>
+)
 
 TodoListItem.propTypes = {
-    handleClick: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired
+    handleToggle: PropTypes.func.isRequired,
+    handleRemove: PropTypes.func.isRequired
 }
 
 export default TodoListItem

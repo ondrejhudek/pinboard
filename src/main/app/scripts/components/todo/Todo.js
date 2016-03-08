@@ -33,7 +33,7 @@ let Todo = ({ dispatch, id, _id, todos, filter }) => {
         <GridTile style={style.gridTile}>
             <List subheader={<AddTodoItem id={id}/>} subheaderStyle={style.subheader}>
                 <VisibleTodoList id={id} filter={filter} items={todos} />
-                <ListItem children={<Footer key={id} id={id} filter={filter}/>} disabled={true} style={style.footer}/>
+                <ListItem children={<Footer key={id} id={id} objectId={_id} filter={filter}/>} disabled={true} style={style.footer}/>
             </List>
         </GridTile>
     )

@@ -3,7 +3,7 @@ import { RaisedButton  } from 'material-ui'
 import AddIcon from 'material-ui/lib/svg-icons/content/add-circle'
 import { connect } from 'react-redux'
 
-import { addTodo } from '../../actions/todos'
+import { fetchAdd } from '../../actions/todos'
 
 const style = {
     add: {
@@ -14,7 +14,7 @@ const style = {
 
 let AddTodo = ({ dispatch }) => {
     const handleAdd = () => {
-        dispatch(addTodo())
+        dispatch(fetchAdd())
     }
 
     return (

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { GridTile, Card, CardTitle, CardText, CardActions, TextField, FlatButton } from 'material-ui'
 import DeleteIcon from 'material-ui/lib/svg-icons/action/delete'
 
-import { connect } from 'react-redux'
 import { updateNote, removeNote } from '../../actions/notes'
 
 const style = {

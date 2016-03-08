@@ -29,6 +29,7 @@ let Notes = ({ notes, isFetching }) => {
 Notes.propTypes = {
     notes: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
+        _id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         body: PropTypes.string.isRequired
     }).isRequired).isRequired,
