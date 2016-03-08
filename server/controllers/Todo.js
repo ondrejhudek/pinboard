@@ -52,7 +52,7 @@ export const createTodo = (res, data) => {
 }
 
 export const removeTodo = (res, data) => {
-    Todo.remove({ _id: data.id }, (err) => {
+    Todo.remove({_id: data.id}, (err) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
@@ -88,22 +88,21 @@ export const toggleItem = (res, data) => {
             res.status(400).send(err)
         }
 
-        console.log('----------- DATA -----------')
-        console.log(data.todo)
+        /* update the toggled todo item */
+        todo.todos = todo.todos.map(t => {
+            if (t.id !== data.todo.id) return t
 
-        console.log('----------- TOGGLE -----------')
-        todo.todos.map(t => {
-            console.log(t)
+            return Object.assign({}, t, {
+                completed: data.todo.completed
+            })
         })
 
-        todo.save((err, updatedTodo) => {
+        todo.save((err) => {
             if (err) {
                 console.log(err)
                 res.status(400).send(err)
             }
 
-            console.log('----------- UPDATED TODO -----------')
-            console.log(updatedTodo)
             res.status(200).send('OK')
         })
     })
@@ -116,15 +115,17 @@ export const removeItem = (res, data) => {
             res.status(400).send(err)
         }
 
-        console.log(todo)
-        //todo.todos = [...todo.todos, data.todo]
-        todo.save((err, updatedTodo) => {
+        /* remove the todo item */
+        todo.todos = todo.todos.filter(t => {
+            return (t.id !== data.todo.id)
+        })
+
+        todo.save((err) => {
             if (err) {
                 console.log(err)
                 res.status(400).send(err)
             }
 
-            console.log(updatedTodo)
             res.status(200).send('OK')
         })
     })

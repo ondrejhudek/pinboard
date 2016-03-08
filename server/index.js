@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 
 import { getAllUsers, getUserByEmail, createUser, updateUser } from './controllers/User'
 import { getAllNotes, getNotes, getNote, createNote, updateNote, removeNote } from './controllers/Note'
-import { getAllTodos, getTodos, getTodo, createTodo, updateTodo, removeTodo, addItem, toggleItem, removeItem } from './controllers/Todo'
+import { getAllTodos, getTodos, getTodo, createTodo, removeTodo, addItem, toggleItem, removeItem } from './controllers/Todo'
 
 import { DB_ENDPOINT } from '../config'
 

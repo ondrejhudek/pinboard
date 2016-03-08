@@ -152,8 +152,6 @@ export const toggleTodoItem = (todoId, objectId, todoItemId, completed) => {
 }
 
 const fetchToggleItem = (objectId, todoItemId, completed) => {
-    console.log(objectId + " | " + todoItemId + " | " + completed)
-
     return fetch(API_TODOS, {
         method: 'POST',
         headers: API_HEADER,
@@ -178,8 +176,6 @@ export const removeTodoItem = (todoId, objectId, todoItemId) => {
 }
 
 const fetchRemoveItem = (objectId, todoItemId) => {
-    console.log(objectId + " | " + todoItemId)
-
     return fetch(API_TODOS, {
         method: 'POST',
         headers: API_HEADER,

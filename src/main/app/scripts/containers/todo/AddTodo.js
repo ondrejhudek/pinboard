@@ -1,7 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { RaisedButton  } from 'material-ui'
 import AddIcon from 'material-ui/lib/svg-icons/content/add-circle'
-import { connect } from 'react-redux'
+import FloatingActionButton from 'material-ui/lib/floating-action-button'
+import ContentAdd from 'material-ui/lib/svg-icons/content/add'
 
 import { fetchAdd } from '../../actions/todos'
 
@@ -17,9 +19,19 @@ let AddTodo = ({ dispatch }) => {
         dispatch(fetchAdd())
     }
 
+    /*
     return (
         <div style={style.add}>
             <RaisedButton label="Add todo" secondary={true} icon={<AddIcon/>} onClick={handleAdd}/>
+        </div>
+    )
+    */
+
+    return (
+        <div className="col-add">
+            <FloatingActionButton secondary={true} style={style} onClick={handleAdd}>
+                <ContentAdd />
+            </FloatingActionButton>
         </div>
     )
 }

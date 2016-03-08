@@ -31,11 +31,28 @@ const Todo = ({ id, _id, todos, filter }) => {
     return (
         <GridTile style={style.gridTile}>
             <List subheader={<AddTodoItem id={id} objectId={_id}/>} subheaderStyle={style.subheader}>
-                <VisibleTodoList id={id} objectId={_id} filter={filter} items={todos} />
+                <VisibleTodoList id={id} objectId={_id} filter={filter} items={todos}/>
                 <ListItem children={<Footer key={id} id={id} objectId={_id} filter={filter}/>} disabled={true} style={style.footer}/>
             </List>
         </GridTile>
     )
+
+
+    //return (
+    //    <div className="todo-pin">
+    //        <List subheader={<AddTodoItem id={id} objectId={_id}/>} subheaderStyle={style.subheader}>
+    //            <VisibleTodoList id={id} objectId={_id} filter={filter} items={todos}/>
+    //            <ListItem children={<Footer key={id} id={id} objectId={_id} filter={filter}/>} disabled={true} style={style.footer}/>
+    //        </List>
+    //    </div>
+    //)
+
+    //return (
+    //    <List subheader={<AddTodoItem id={id} objectId={_id}/>} subheaderStyle={style.subheader}>
+    //        <VisibleTodoList id={id} objectId={_id} filter={filter} items={todos}/>
+    //        <ListItem children={<Footer key={id} id={id} objectId={_id} filter={filter}/>} disabled={true} style={style.footer}/>
+    //    </List>
+    //)
 }
 
 Todo.propTypes = {

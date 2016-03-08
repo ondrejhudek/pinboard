@@ -5,9 +5,16 @@ import TodoListItem from './TodoListItem'
 const TodoList = ({ id, objectId, todos, handleToggle, handleRemove }) => {
     return (
         <div>
-            {todos.map(todo =>
-                <TodoListItem key={todo.id} {...todo} handleToggle={() => handleToggle(id, objectId, todo.id, !todo.completed)} handleRemove={(e) => handleRemove(e, id, objectId, todo.id)}/>
-            )}
+            <p className="list-empty" id={!todos.length ? 'show' : ''}>
+                Add your <strong>first todo item</strong>!
+            </p>
+
+            <div>
+                {todos.map(todo =>
+                    <TodoListItem key={todo.id} {...todo} handleToggle={() => handleToggle(id, objectId, todo.id, !todo.completed)}
+                                  handleRemove={(e) => handleRemove(e, id, objectId, todo.id)}/>
+                )}
+            </div>
         </div>
     )
 }

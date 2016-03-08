@@ -5,7 +5,9 @@ import CircularProgress from 'material-ui/lib/circular-progress'
 import Todo from './Todo'
 
 let Todos = ({ todos, isFetching }) => {
-    todos.sort((a, b) => { return b.id - a.id })
+    todos.sort((a, b) => {
+        return b.id - a.id
+    })
 
     return (
         <div>
@@ -17,7 +19,7 @@ let Todos = ({ todos, isFetching }) => {
                 Add your <strong>first todo</strong>!
             </p>
 
-            <div>
+            <div className="">
                 {todos.map(todo =>
                     <Todo key={todo.id} {...todo} />
                 )}
