@@ -1,4 +1,3 @@
 # Summary
 
-* [Installation](installation.md)
 
