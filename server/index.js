@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 
 import { getAllUsers, getUserByEmail, createUser, updateUser } from './controllers/User'
 import { getAllNotes, getNotes, getNote, createNote, updateNote, removeNote } from './controllers/Note'
-import { getAllTodos, getTodo, createTodo, updateTodo, removeTodo } from './controllers/Todo'
+import { getAllTodos, getTodos, getTodo, createTodo, updateTodo, removeTodo } from './controllers/Todo'
 
 import { DB_ENDPOINT } from '../config'
 
@@ -24,9 +24,9 @@ app.get('/api/users', (req, res) => {
 
 app.post('/api/users', (req, res) => {
     const eventType = req.body.event
-    if(!eventType) return
+    if (!eventType) return
 
-    switch(eventType){
+    switch (eventType) {
         case 'GET_BY_EMAIL':
             getUserByEmail(res, req.body.data)
             break
@@ -45,15 +45,15 @@ app.post('/api/users', (req, res) => {
 })
 
 /** NOTES **/
-app.get('/api/notes', (req, res) =>  {
+app.get('/api/notes', (req, res) => {
     getAllNotes(res)
 })
 
-app.post('/api/notes', (req, res) =>  {
+app.post('/api/notes', (req, res) => {
     const eventType = req.body.event
-    if(!eventType) return
+    if (!eventType) res.status(400).send('Event type is missing in a request.')
 
-    switch(eventType){
+    switch (eventType) {
         case 'GET':
             getNotes(res, req.body.data)
             break
@@ -75,21 +75,25 @@ app.post('/api/notes', (req, res) =>  {
             break
 
         default:
-            res.status(400).send('Event type parameter missing in a request.')
+            res.status(400).send('Wrong event type parameter in a request.')
     }
 })
 
 /** TODOS **/
-app.get('/api/todos', (req, res) =>  {
+app.get('/api/todos', (req, res) => {
     getAllTodos(res)
 })
 
 app.post('/api/todos', (req, res) => {
     const eventType = req.body.event
-    if(!eventType) return
+    if (!eventType) res.status(400).send('Event type is missing in a request.')
 
-    switch(eventType){
+    switch (eventType) {
         case 'GET':
+            getTodos(res, req.body.data)
+            break
+
+        case 'GET_ONE':
             getTodo(res, req.body.data)
             break
 
@@ -106,7 +110,7 @@ app.post('/api/todos', (req, res) => {
             break
 
         default:
-            res.status(400).send('Event type parameter missing in a request.')
+            res.status(400).send('Wrong event type parameter in a request.')
     }
 })
 

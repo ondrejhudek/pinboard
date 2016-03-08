@@ -2,7 +2,7 @@ import React from 'react'
 import { TextField, RaisedButton } from 'material-ui'
 
 import { connect } from 'react-redux'
-import { addNote, fetchCreate } from '../../actions'
+import { fetchCreate } from '../../actions/notes'
 
 const style = {
     colTextfield: {

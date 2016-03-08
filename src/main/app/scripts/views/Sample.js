@@ -1,7 +1,10 @@
 import React from 'react'
 import 'isomorphic-fetch'
 
-import { API_NOTES, API_HEADER } from '../../../../../config'
+import { API_NOTES, API_TODOS, API_HEADER } from '../../../../../config'
+import auth from '../services/auth/index'
+
+const userId = auth.getUserId()
 
 class SampleView extends React.Component {
     constructor(props) {
@@ -19,10 +22,10 @@ class SampleView extends React.Component {
     }
 
     handleCreate() {
-        fetch(API_NOTES, {
+        fetch(API_TODOS, {
             method: 'POST',
             headers: API_HEADER,
-            body: JSON.stringify({ event: 'CREATE', data: { userId: '0', title: 'Test000', body: 'Test000'} })
+            body: JSON.stringify({ event: 'CREATE', data: { userId: userId } })
         })
             .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
             .then(text => console.log(text))

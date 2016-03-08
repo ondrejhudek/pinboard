@@ -1,3 +1,6 @@
+/**
+ * General
+ */
 body {
     margin: 0;
     background: #f6f6f6;
@@ -12,5 +15,28 @@ body {
         font-size: 1.8em;
         padding-bottom: 10px;
         border-bottom: 1px solid #ddd;
+    }
+}
+
+/**
+ * State
+ */
+.state-fetching {
+    display: none;
+    padding-top: 20px;
+    text-align: center;
+
+    &#show {
+        display: block;
+    }
+}
+
+.state-empty {
+    display: none;
+    padding-top: 20px;
+    text-align: center;
+
+    &#show {
+        display: block;
     }
 }

@@ -1,27 +1,25 @@
-import React, { PropTypes } from 'react'
-import { TextField } from 'material-ui'
-
+import React from 'react'
+import { RaisedButton  } from 'material-ui'
+import AddIcon from 'material-ui/lib/svg-icons/content/add-circle'
 import { connect } from 'react-redux'
-import { addTodo } from '../../actions'
+
+import { addTodo } from '../../actions/todos'
 
 const style = {
-    field: {
-        width: '100%'
+    add: {
+        marginBottom: 20,
+        textAlign: 'center'
     }
 }
 
 let AddTodo = ({ dispatch }) => {
-    const handleAdd = (e) => {
-        const value = e.target.value.trim()
-
-        if(!value) return
-        dispatch(addTodo(value))
-        e.target.value = ''
+    const handleAdd = () => {
+        dispatch(addTodo())
     }
 
     return (
-        <div>
-            <TextField hintText="What needs to be done?" style={style.field} onEnterKeyDown={handleAdd}/>
+        <div style={style.add}>
+            <RaisedButton label="Add todo" secondary={true} icon={<AddIcon/>} onClick={handleAdd}/>
         </div>
     )
 }

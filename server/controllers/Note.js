@@ -14,13 +14,13 @@ export const getAllNotes = (res) => {
 export const getNotes = (res, data) => {
     Note.find({
         'user_id': data.userId
-    }, (err, note) => {
+    }, (err, notes) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
-        res.json(note)
+        res.json(notes)
     })
 }
 
@@ -66,10 +66,10 @@ export const updateNote = (res, data) => {
                 console.log(err)
                 res.status(400).send(err)
             }
+
+            res.status(200).send('OK')
         })
     })
-
-    res.status(200).send('OK')
 }
 
 export const removeNote = (res, data) => {
@@ -78,7 +78,7 @@ export const removeNote = (res, data) => {
             console.log(err)
             res.status(400).send(err)
         }
-    })
 
-    res.status(200).send('OK')
+        res.status(200).send('OK')
+    })
 }

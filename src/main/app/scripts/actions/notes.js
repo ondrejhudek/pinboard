@@ -3,13 +3,18 @@ import 'isomorphic-fetch'
 import { API_NOTES, API_HEADER } from '../../../../../config'
 import auth from '../services/auth/index'
 
-/** NOTES **/
 let nextNoteId = 0
 
-export const receiveNotes = (json) => {
+const requestNotes = () => {
+    return {
+        type: 'REQUEST_NOTES'
+    }
+}
+
+const receiveNotes = (json) => {
     return {
         type: 'RECEIVE_NOTES',
-        notes: json.map(data => {
+        items: json.map(data => {
             data.id = nextNoteId++
             return data
         }),
@@ -19,10 +24,11 @@ export const receiveNotes = (json) => {
 
 export const fetchNotes = () => {
     return dispatch => {
+        dispatch(requestNotes())
         return fetch(API_NOTES, {
             method: 'POST',
             headers: API_HEADER,
-            body: JSON.stringify({event: 'GET', data: { userId: auth.getUserId() }})
+            body: JSON.stringify({event: 'GET', data: {userId: auth.getUserId()}})
         })
             .then(response => response.ok ? response.json() : response.json().then(err => Promise.reject(err)))
             .then(json => dispatch(receiveNotes(json)))
@@ -33,11 +39,14 @@ export const fetchNotes = () => {
 const addNote = (objectId, title, body) => {
     return {
         type: 'ADD_NOTE',
-        id: nextNoteId++,
-        _id: objectId,
-        user_id: auth.getUserId(),
-        title,
-        body
+        note: {
+            id: nextNoteId++,
+            _id: objectId,
+            user_id: auth.getUserId(),
+            title,
+            body
+        },
+        date: Date.now()
     }
 }
 
@@ -48,20 +57,22 @@ export const fetchCreate = (title) => {
             headers: API_HEADER,
             body: JSON.stringify({event: 'CREATE', data: {userId: auth.getUserId(), title: title}})
         })
-            .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
-            .then(text => dispatch(addNote(text, title, '')))
+            .then(response => response.ok ? response.json() : response.json().then(err => Promise.reject(err)))
+            .then(json => dispatch(addNote(json, title, '')))
             .catch(err => console.log(err))
     }
 }
 
 export const updateNote = (id, objectId, title, body) => {
-    console.log(id + " | " + objectId + " | " + title + " | " + body)
     fetchUpdate(objectId, title, body)
     return {
         type: 'UPDATE_NOTE',
-        id: id,
-        title,
-        body
+        note: {
+            id: id,
+            title,
+            body
+        },
+        date: Date.now()
     }
 }
 
@@ -69,40 +80,31 @@ const fetchUpdate = (objectId, title, body) => {
     return fetch(API_NOTES, {
         method: 'POST',
         headers: API_HEADER,
-        body: JSON.stringify({ event: 'UPDATE', data: { id: objectId, title: title, body: body } })
+        body: JSON.stringify({event: 'UPDATE', data: {id: objectId, title: title, body: body}})
     })
         .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
-        .then(text => console.log(text))
+        .then(text => text)
         .catch(err => console.log(err))
 }
 
-/** TODOS **/
-let nextTodoId = 0
-export const addTodo = (text) => {
+export const removeNote = (id, objectId) => {
+    fetchRemove(objectId)
     return {
-        type: 'ADD_TODO',
-        id: nextTodoId++,
-        text
+        type: 'REMOVE_NOTE',
+        note: {
+            id: id
+        },
+        date: Date.now()
     }
 }
 
-export const setVisibilityFilter = (filter) => {
-    return {
-        type: 'SET_VISIBILITY_FILTER',
-        filter
-    }
-}
-
-export const toggleTodo = (id) => {
-    return {
-        type: 'TOGGLE_TODO',
-        id
-    }
-}
-
-export const removeTodo = (id) => {
-    return {
-        type: 'REMOVE_TODO',
-        id
-    }
+const fetchRemove = (objectId) => {
+    return fetch(API_NOTES, {
+        method: 'POST',
+        headers: API_HEADER,
+        body: JSON.stringify({event: 'REMOVE', data: {id: objectId}})
+    })
+        .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
+        .then(text => text)
+        .catch(err => console.log(err))
 }

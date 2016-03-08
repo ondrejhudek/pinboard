@@ -11,6 +11,19 @@ export const getAllTodos = (res) => {
     })
 }
 
+export const getTodos = (res, data) => {
+    Todo.find({
+        'user_id': data.userId
+    }, (err, todos) => {
+        if (err) {
+            console.log(err)
+            res.status(400).send(err)
+        }
+
+        res.json(todos)
+    })
+}
+
 export const getTodo = (res, data) => {
     Todo.findById(data.id, (err, note) => {
         if (err) {
@@ -25,7 +38,7 @@ export const getTodo = (res, data) => {
 export const createTodo = (res, data) => {
     const newTodo = new Todo({
         user_id: data.userId,
-        todos: data.todos
+        todos: []
     })
 
     newTodo.save((err) => {

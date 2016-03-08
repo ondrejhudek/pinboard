@@ -11,39 +11,58 @@ const getModel = (model) => {
 const note = (state, action) => {
     switch (action.type) {
         case 'ADD_NOTE':
-            return getModel(action)
-        case 'UPDATE_NOTE':
-            if (state.id !== action.id) {
-                return state
-            }
+            return getModel(action.note)
 
+        case 'UPDATE_NOTE':
             return Object.assign({}, state, {
-                title: action.title,
-                body: action.body
+                title: action.note.title,
+                body: action.note.body
             })
+
         case 'RECEIVE_NOTES':
             return getModel(state)
+
         default:
             return state
     }
 }
 
-const notes = (state = [], action) => {
+const notes = (state = {isFetching: false, items: []}, action) => {
     switch (action.type) {
         case 'ADD_NOTE':
-            return [
-                ...state,
-                note(undefined, action)
-            ]
+            return Object.assign({}, state, {
+                items: [...state.items, note([], action)],
+                lastUpdated: action.date
+            })
+
         case 'UPDATE_NOTE':
-            return state.map(t =>
-                note(t, action)
-            )
+            return Object.assign({}, state, {
+                items: state.items.map(t => {
+                    return (t.id === action.note.id) ? note(t, action) : t
+                }),
+                lastUpdated: action.date
+            })
+
+        case 'REMOVE_NOTE':
+            return Object.assign({}, state, {
+                items: state.items.filter(t => {
+                    return (t.id !== action.note.id)
+                }),
+                lastUpdated: action.date
+            })
+
+        case 'REQUEST_NOTES':
+            return Object.assign({}, state, {
+                isFetching: true
+            })
+
         case 'RECEIVE_NOTES':
-            //return Object.assign([], state, action.notes)
-            return action.notes.map(t =>
-                note(t, action)
-            )
+            return Object.assign({}, state, {
+                isFetching: false,
+                items: action.items.map(t => note(t, action)),
+                lastUpdated: action.receivedAt
+            })
+
         default:
             return state
     }

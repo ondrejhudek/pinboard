@@ -20,7 +20,7 @@ class NoteView extends React.Component {
 
     render() {
         return (
-            <div className="state-todo">
+            <div className="view-note">
                 <h2>Notes</h2>
 
                 <Card style={style.headerCard}>

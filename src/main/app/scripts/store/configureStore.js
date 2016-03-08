@@ -6,7 +6,8 @@ import createLogger from 'redux-logger'
 
 import DevTools from './../containers/DevTools'
 import rootReducer from '../reducers'
-import { fetchNotes } from '../actions'
+import { fetchNotes } from '../actions/notes'
+import { fetchTodos } from '../actions/todos'
 
 const loggerMiddleware = createLogger()
 const middleware = syncHistory(browserHistory)
@@ -23,6 +24,7 @@ const finalCreateStore = compose(
 const store = finalCreateStore(rootReducer)
 middleware.listenForReplays(store)
 
-store.dispatch(fetchNotes())
+//store.dispatch(fetchNotes())
+store.dispatch(fetchTodos())
 
 export default store
