@@ -1,4 +1,4 @@
 # Summary
 
-* Install
+* [Install](doc/install.md)
 
