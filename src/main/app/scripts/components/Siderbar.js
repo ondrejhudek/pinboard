@@ -10,7 +10,7 @@ class Sidebar extends React.Component {
 
         this.state = {
             open: true
-        };
+        }
     }
 
     render() {

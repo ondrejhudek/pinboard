@@ -11,9 +11,10 @@ import DashboardView from '../views/Dashboard'
 import SampleView from '../views/Sample'
 import NoteView from '../views/Note'
 import TodoView from '../views/Todo'
-import EventView from '../views/Event'
+import CalendarView from '../views/Calendar'
 import NotFoundView from '../views/NotFound'
 import LogoutComponent from '../views/Logout'
+import TestView from '../views/Test'
 
 /*
 const App = React.createClass({
@@ -72,7 +73,8 @@ export default (
         <Route path='sample' component={SampleView} onEnter={requireAuth}/>
         <Route path='note' component={NoteView} onEnter={requireAuth}/>
         <Route path='todo' component={TodoView} onEnter={requireAuth}/>
-        <Route path='event' component={EventView} onEnter={requireAuth}/>
+        <Route path='calendar' component={CalendarView} onEnter={requireAuth}/>
+        <Route path='test' component={TestView} onEnter={requireAuth}/>
         <Route path='404' component={NotFoundView}/>
         <Redirect from='*' to='/404'/>
     </Route>

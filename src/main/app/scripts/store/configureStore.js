@@ -24,7 +24,7 @@ const finalCreateStore = compose(
 const store = finalCreateStore(rootReducer)
 middleware.listenForReplays(store)
 
-store.dispatch(fetchNotes())
-store.dispatch(fetchTodos())
+//store.dispatch(fetchNotes())
+//store.dispatch(fetchTodos())
 
 export default store

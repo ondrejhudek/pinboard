@@ -40,3 +40,14 @@ body {
         display: block;
     }
 }
+
+/**
+ * Buttons
+ */
+.floatingButton-add {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 35px;
+    z-index: 2;
+}

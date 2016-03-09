@@ -9,4 +9,4 @@ import store from '../store/configureStore'
 ReactDOM.render(
     <Root history={browserHistory} routes={routes} store={store} />,
     document.getElementById('app')
-);
+)
