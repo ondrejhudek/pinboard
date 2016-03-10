@@ -12,25 +12,25 @@ export const getAllUsers = (res) => {
 }
 
 export const getUserByEmail = (res, data) => {
-    User.findOne({ 'email': data.email }, (err, user) => {
+    User.findOne({ 'email': data.email }, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
-        res.json(user)
+        res.json(doc)
     })
 }
 
 export const createUser = (res, data) => {
-    const newUser = new User({
+    const user = new User({
         email: data.email,
         firstname: data.firstname,
         lastname: data.lastname,
         password: data.password
     })
 
-    newUser.save((err) => {
+    user.save((err) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
@@ -41,15 +41,15 @@ export const createUser = (res, data) => {
 }
 
 export const updateUser = (res, data) => {
-    User.findById(data.id, (err, user) => {
+    User.findById(data.id, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
-        user.firstname = data.firstname
-        user.lastname = data.lastname
-        user.save((err) => {
+        doc.firstname = data.firstname
+        doc.lastname = data.lastname
+        doc.save((err) => {
             if (err) {
                 console.log(err)
                 res.status(400).send(err)

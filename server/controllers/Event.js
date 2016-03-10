@@ -1,7 +1,7 @@
-import { Note } from '../models/Note'
+import { Event } from '../models/Event'
 
-export const getAllNotes = (res) => {
-    Note.find((err, doc) => {
+export const getAllEvents = (res) => {
+    Event.find((err, doc) => {
         if (!err) {
             res.json(doc)
         } else {
@@ -11,8 +11,8 @@ export const getAllNotes = (res) => {
     })
 }
 
-export const getNotes = (res, data) => {
-    Note.find({
+export const getEvents = (res, data) => {
+    Event.find({
         'user_id': data.userId
     }, (err, doc) => {
         if (err) {
@@ -24,8 +24,8 @@ export const getNotes = (res, data) => {
     })
 }
 
-export const getNote = (res, data) => {
-    Note.findById(data.id, (err, doc) => {
+export const getEvent = (res, data) => {
+    Event.findById(data.id, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
@@ -35,14 +35,17 @@ export const getNote = (res, data) => {
     })
 }
 
-export const createNote = (res, data) => {
-    const note = new Note({
+export const createEvent = (res, data) => {
+    const event = new Event({
         user_id: data.userId,
-        title: data.title,
-        body: (data.body) ? data.body : ''
+        title: data.event.title,
+        description: data.event.description,
+        startDate: data.event.startDate,
+        endDate: data.event.endDate,
+        location: data.event.location
     })
 
-    note.save((err, doc) => {
+    event.save((err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
@@ -52,16 +55,16 @@ export const createNote = (res, data) => {
     })
 }
 
-export const updateNote = (res, data) => {
-    Note.findById(data.id, (err, doc) => {
+export const updateEvent = (res, data) => {
+    Event.findById(data.id, (err, note) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
-        doc.title = data.title
-        doc.body = data.body
-        doc.save((err) => {
+        note.title = data.title
+        note.body = data.body
+        note.save((err) => {
             if (err) {
                 console.log(err)
                 res.status(400).send(err)
@@ -72,8 +75,8 @@ export const updateNote = (res, data) => {
     })
 }
 
-export const removeNote = (res, data) => {
-    Note.remove({ _id: data.id }, (err) => {
+export const removeEvent = (res, data) => {
+    Event.remove({ _id: data.id }, (err) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)

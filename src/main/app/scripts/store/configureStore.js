@@ -8,6 +8,7 @@ import DevTools from './../containers/DevTools'
 import rootReducer from '../reducers'
 import { fetchNotes } from '../actions/notes'
 import { fetchTodos } from '../actions/todos'
+import { fetchEvents } from '../actions/events'
 
 const loggerMiddleware = createLogger()
 const middleware = syncHistory(browserHistory)
@@ -26,5 +27,6 @@ middleware.listenForReplays(store)
 
 //store.dispatch(fetchNotes())
 //store.dispatch(fetchTodos())
+store.dispatch(fetchEvents())
 
 export default store

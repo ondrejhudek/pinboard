@@ -14,40 +14,40 @@ export const getAllTodos = (res) => {
 export const getTodos = (res, data) => {
     Todo.find({
         'user_id': data.userId
-    }, (err, todos) => {
+    }, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
-        res.json(todos)
+        res.json(doc)
     })
 }
 
 export const getTodo = (res, data) => {
-    Todo.findById(data.id, (err, note) => {
+    Todo.findById(data.id, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
-        res.json(note)
+        res.json(doc)
     })
 }
 
 export const createTodo = (res, data) => {
-    const newTodo = new Todo({
+    const todo = new Todo({
         user_id: data.userId,
         todos: []
     })
 
-    newTodo.save((err, todo) => {
+    todo.save((err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
-        res.status(200).send(todo._id)
+        res.status(200).send(doc._id)
     })
 }
 
@@ -63,14 +63,14 @@ export const removeTodo = (res, data) => {
 }
 
 export const addItem = (res, data) => {
-    Todo.findById(data.id, (err, todo) => {
+    Todo.findById(data.id, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
-        todo.todos = [...todo.todos, data.todo]
-        todo.save((err) => {
+        doc.todos = [...doc.todos, data.todo]
+        doc.save((err) => {
             if (err) {
                 console.log(err)
                 res.status(400).send(err)
@@ -82,14 +82,14 @@ export const addItem = (res, data) => {
 }
 
 export const toggleItem = (res, data) => {
-    Todo.findById(data.id, (err, todo) => {
+    Todo.findById(data.id, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
         /* update the toggled todo item */
-        todo.todos = todo.todos.map(t => {
+        doc.todos = doc.todos.map(t => {
             if (t.id !== data.todo.id) return t
 
             return Object.assign({}, t, {
@@ -97,7 +97,7 @@ export const toggleItem = (res, data) => {
             })
         })
 
-        todo.save((err) => {
+        doc.save((err) => {
             if (err) {
                 console.log(err)
                 res.status(400).send(err)
@@ -109,18 +109,18 @@ export const toggleItem = (res, data) => {
 }
 
 export const removeItem = (res, data) => {
-    Todo.findById(data.id, (err, todo) => {
+    Todo.findById(data.id, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
         /* remove the todo item */
-        todo.todos = todo.todos.filter(t => {
+        doc.todos = doc.todos.filter(t => {
             return (t.id !== data.todo.id)
         })
 
-        todo.save((err) => {
+        doc.save((err) => {
             if (err) {
                 console.log(err)
                 res.status(400).send(err)

@@ -1,7 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { TextField, RaisedButton } from 'material-ui'
 
-import { connect } from 'react-redux'
 import { fetchCreate } from '../../actions/notes'
 
 const style = {
@@ -17,6 +17,8 @@ const style = {
 }
 
 let AddNote = ({ dispatch }) => {
+    console.log(dispatch)
+
     const handleAdd = (e) => {
         e.preventDefault()
         const value = e.target.newNote.value

@@ -17,6 +17,7 @@ import del from 'del'
 import cache from 'gulp-cache'
 import size from 'gulp-size'
 import useref from 'gulp-useref'
+import inject from 'gulp-inject'
 
 const reload = browserSync.reload
 
@@ -34,7 +35,9 @@ const PATH = {
     outputScripts: 'dist/scripts',
     outputImages: 'dist/images',
     outputMain: 'app.js',
-    testDir: 'src/test'
+    outputStylesNodeModuleFiles: 'dist/styles/node-modules/**/*.css',
+    injectCssFiles: ['node_modules/react-big-calendar/lib/css/react-big-calendar.css'],
+    test: 'src/test'
 }
 
 // bundler for react compiling
@@ -91,7 +94,7 @@ gulp.task('serve', ['bundle'], () => {
 })
 
 // convert index.html to output folder
-gulp.task('html', () => {
+gulp.task('html', ['inject'], () => {
     return gulp.src(PATH.html)
         .pipe(useref())
         .pipe(gulp.dest(PATH.output))
@@ -115,6 +118,19 @@ gulp.task('scripts', rebundle)
 gulp.task('images', () => {
     return gulp.src(PATH.appImages)
         .pipe(gulp.dest(PATH.outputImages))
+})
+
+gulp.task('inject', ['copyCssFiles'], () => {
+    const target = gulp.src(PATH.html)
+    const cssFiles = gulp.src(PATH.outputStylesNodeModuleFiles)
+
+    return target.pipe(inject(cssFiles, {ignorePath: PATH.output, addRootSlash: false}))
+        .pipe(gulp.dest(PATH.app))
+})
+
+gulp.task('copyCssFiles', () => {
+    return gulp.src(PATH.injectCssFiles)
+        .pipe(gulp.dest(PATH.outputStyles + '/node-modules'))
 })
 
 // bundle

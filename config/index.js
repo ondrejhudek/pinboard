@@ -10,7 +10,7 @@ const API_ENDPOINT = 'http://localhost/api'
 export const API_USERS = API_ENDPOINT + '/users'
 export const API_NOTES = API_ENDPOINT + '/notes'
 export const API_TODOS = API_ENDPOINT + '/todos'
-export const API_CALENDAR = API_ENDPOINT + '/calendar'
+export const API_EVENTS = API_ENDPOINT + '/events'
 
 export const API_HEADER = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import AddEvent from '../containers/calendar/AddEvent'
+import Calendar from '../components/calendar/Calendar'
 
 class CalendarView extends React.Component {
     constructor(props) {
@@ -9,10 +10,12 @@ class CalendarView extends React.Component {
 
     render() {
         return (
-            <div className="state-calendar">
+            <div className="view-calendar">
                 <h2>Calendar</h2>
 
                 <AddEvent />
+
+                <Calendar />
             </div>
         )
     }
