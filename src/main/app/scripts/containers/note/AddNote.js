@@ -17,8 +17,6 @@ const style = {
 }
 
 let AddNote = ({ dispatch }) => {
-    console.log(dispatch)
-
     const handleAdd = (e) => {
         e.preventDefault()
         const value = e.target.newNote.value
