@@ -1,4 +1,6 @@
 .sidebar {
+    width: 265px !important;
+
     header {
         padding: 20px 20px 25px;
         background-color: $brand-blue;
@@ -41,5 +43,9 @@
                 }
             }
         }
+    }
+
+    @media(min-width: 1600px) {
+        width: 300px !important;
     }
 }

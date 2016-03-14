@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 import { getAllUsers, getUserByEmail, createUser, updateUser } from './controllers/User'
 import { getAllNotes, getNotes, getNote, createNote, updateNote, removeNote } from './controllers/Note'
 import { getAllTodos, getTodos, getTodo, createTodo, removeTodo, addItem, toggleItem, removeItem } from './controllers/Todo'
-import { getAllEvents, getEvents, getEvent, createEvent } from './controllers/Event'
+import { getAllEvents, getEvents, getEvent, createEvent, updateEvent, removeEvent } from './controllers/Event'
 
 import { DB_ENDPOINT } from '../config'
 
@@ -143,6 +143,14 @@ app.post('/api/events', (req, res) => {
 
         case 'CREATE':
             createEvent(res, req.body.data)
+            break
+
+        case 'UPDATE':
+            updateEvent(res, req.body.data)
+            break
+
+        case 'REMOVE':
+            removeEvent(res, req.body.data)
             break
 
         default:

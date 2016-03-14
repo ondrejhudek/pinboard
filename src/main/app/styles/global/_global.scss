@@ -16,6 +16,11 @@ body {
         padding-bottom: 10px;
         border-bottom: 1px solid #ddd;
     }
+
+    @media(min-width: 1600px) {
+        margin-left: 370px;
+        margin-right: 80px;
+    }
 }
 
 /**

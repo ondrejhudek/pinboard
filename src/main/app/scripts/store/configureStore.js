@@ -16,8 +16,8 @@ const middleware = syncHistory(browserHistory)
 const finalCreateStore = compose(
     applyMiddleware(
         middleware,
-        thunkMiddleware,
-        loggerMiddleware
+        thunkMiddleware
+        //loggerMiddleware
     ),
     DevTools.instrument()
 )(createStore)
@@ -25,8 +25,8 @@ const finalCreateStore = compose(
 const store = finalCreateStore(rootReducer)
 middleware.listenForReplays(store)
 
-//store.dispatch(fetchNotes())
-//store.dispatch(fetchTodos())
+store.dispatch(fetchNotes())
+store.dispatch(fetchTodos())
 store.dispatch(fetchEvents())
 
 export default store

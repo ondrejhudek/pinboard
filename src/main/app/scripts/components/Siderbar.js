@@ -15,7 +15,7 @@ class Sidebar extends React.Component {
 
     render() {
         return (
-            <LeftNav open={this.state.open} className="sidebar" width={265}>
+            <LeftNav open={this.state.open} className="sidebar">
                 <header>
                     <h1>
                         <FontAwesome name="hand-peace-o"/> hudyapp

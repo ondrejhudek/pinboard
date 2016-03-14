@@ -20,6 +20,15 @@ const event = (state, action) => {
         case 'ADD_EVENT':
             return getModel(action.event)
 
+        case 'UPDATE_EVENT':
+            return Object.assign({}, state, {
+                title: action.event.title,
+                startDate: action.event.startDate,
+                endDate: action.event.endDate,
+                description: action.event.description,
+                location: action.event.location
+            })
+
         default:
             return state
     }
@@ -42,6 +51,22 @@ const events = (state = {isFetching: false, items: []}, action) => {
         case 'ADD_EVENT':
             return Object.assign({}, state, {
                 items: [...state.items, event(undefined, action)],
+                lastUpdated: action.date
+            })
+
+        case 'UPDATE_EVENT':
+            return Object.assign({}, state, {
+                items: state.items.map(t => {
+                    return (t.id === action.event.id) ? event(t, action) : t
+                }),
+                lastUpdated: action.date
+            })
+
+        case 'REMOVE_EVENT':
+            return Object.assign({}, state, {
+                items: state.items.filter(t => {
+                    return (t.id !== action.event.id)
+                }),
                 lastUpdated: action.date
             })
 

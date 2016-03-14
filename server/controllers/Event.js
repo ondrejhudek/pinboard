@@ -56,15 +56,19 @@ export const createEvent = (res, data) => {
 }
 
 export const updateEvent = (res, data) => {
-    Event.findById(data.id, (err, note) => {
+    Event.findById(data.id, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
-        note.title = data.title
-        note.body = data.body
-        note.save((err) => {
+        doc.title = data.event.title
+        doc.description = data.event.description
+        doc.startDate = data.event.startDate
+        doc.endDate = data.event.endDate
+        doc.location = data.event.location
+
+        doc.save((err) => {
             if (err) {
                 console.log(err)
                 res.status(400).send(err)

@@ -61,6 +61,7 @@ export const updateNote = (res, data) => {
 
         doc.title = data.title
         doc.body = data.body
+
         doc.save((err) => {
             if (err) {
                 console.log(err)

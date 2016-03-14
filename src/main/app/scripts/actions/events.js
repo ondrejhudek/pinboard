@@ -40,6 +40,7 @@ export const fetchEvents = () => {
     }
 }
 
+/* add event */
 const addEvent = (objectId, event) => {
     event.user_id = auth.getUserId()
     event.id = nextEventId++
@@ -63,4 +64,46 @@ export const fetchAdd = (event) => {
             .then(json => dispatch(addEvent(json, event)))
             .catch(err => console.log(err))
     }
+}
+
+/* update event */
+export const updateEvent = (event) => {
+    fetchUpdate(event)
+    return {
+        type: 'UPDATE_EVENT',
+        event,
+        date: Date.now()
+    }
+}
+
+const fetchUpdate = (event) => {
+    return fetch(API_EVENTS, {
+        method: 'POST',
+        headers: API_HEADER,
+        body: JSON.stringify({event: 'UPDATE', data: {id: event.objectId, event}})
+    })
+        .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
+        .then(text => text)
+        .catch(err => console.log(err))
+}
+
+/* remove event */
+export const removeEvent = (event) => {
+    fetchRemove(event)
+    return {
+        type: 'REMOVE_EVENT',
+        event,
+        date: Date.now()
+    }
+}
+
+const fetchRemove = (event) => {
+    return fetch(API_EVENTS, {
+        method: 'POST',
+        headers: API_HEADER,
+        body: JSON.stringify({event: 'REMOVE', data: {id: event.objectId}})
+    })
+        .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
+        .then(text => text)
+        .catch(err => console.log(err))
 }
