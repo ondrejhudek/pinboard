@@ -12,7 +12,7 @@ class NotFoundView extends React.Component {
                     <FlatButton label="Back to home" secondary={true}/>
                 </Link>
             </Card>
-        );
+        )
     }
 }
 

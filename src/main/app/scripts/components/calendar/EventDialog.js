@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {PropTypes} from 'react'
+import {connect} from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import { Dialog, FlatButton, TextField, DatePicker, TimePicker, Snackbar  } from 'material-ui'
+import {Dialog, FlatButton, TextField, DatePicker, TimePicker, Snackbar} from 'material-ui'
 import Colors from 'material-ui/lib/styles/colors'
+import FontAwesome from 'react-fontawesome'
 
 import EventIcon from 'material-ui/lib/svg-icons/action/event'
 import TitleIcon from 'material-ui/lib/svg-icons/editor/text-fields'
@@ -11,8 +12,8 @@ import DateIcon from 'material-ui/lib/svg-icons/action/date-range'
 import TimeIcon from 'material-ui/lib/svg-icons/device/access-time'
 import LocationIcon from 'material-ui/lib/svg-icons/communication/location-on'
 
-import { fetchAdd, updateEvent, removeEvent } from '../../actions/events'
-import { getDatetime, getFormatedDate } from '../../components/Util'
+import {fetchAdd, updateEvent, removeEvent} from '../../actions/events'
+import {getDatetime, getFormatedDate} from '../../components/Util'
 
 const style = {
     column: {
@@ -22,6 +23,10 @@ const style = {
     icon: {
         float: 'left',
         padding: 14
+    },
+    iconRead: {
+        padding: '0px 10px 4px 4px',
+        verticalAlign: 'middle'
     },
     titleField: {
         display: 'block',
@@ -165,8 +170,7 @@ class EventDialog extends React.Component {
     }
 
     validateForm() {
-        //this.setState({disableSubmit: (!this.state.eventTitle || !this.state.eventStartDate || !this.state.eventStartTime || !this.state.eventEndDate || !this.state.eventEndTime)})
-        this.setState({disableSubmit: (!this.state.eventTitle)})
+        this.setState({disableSubmit: (!this.state.eventTitle || !this.state.eventStartDate || !this.state.eventStartTime || !this.state.eventEndDate || !this.state.eventEndTime)})
     }
 
     addEvent() {
@@ -241,6 +245,11 @@ class EventDialog extends React.Component {
             endTimeProps.defaultTime = this.state.eventEndTime
         }
 
+        let locLink = this.state.eventLocation
+        if (this.state.mode === 'READ') {
+            locLink = "http://maps.google.com/?q=" + locLink
+        }
+
         /* render html */
         let content = ''
         const error = (
@@ -250,7 +259,7 @@ class EventDialog extends React.Component {
 
         if (this.state.mode === 'CREATE' || this.state.mode === 'UPDATE') {
             content = (
-                <Dialog title="Add new event" actions={this.state.mode === 'CREATE' ? actionsCreate : actionsUpdate} modal={true} open={this.state.open}>
+                <Dialog title={this.state.mode === 'CREATE' ? 'Add new event' : 'Update event'} actions={this.state.mode === 'CREATE' ? actionsCreate : actionsUpdate} modal={true} open={this.state.open}>
                     <div>
                         <div>
                             <TitleIcon color={iconColor} style={style.icon}/>
@@ -307,17 +316,35 @@ class EventDialog extends React.Component {
         } else if (this.state.mode === 'READ') {
             content = (
                 <Dialog title="Event detail" actions={actionsRead} modal={true} open={this.state.open}>
-                    <h4>{this.state.eventTitle}</h4>
-                    <p>What? {this.state.eventDescription}</p>
-                    <p>Starts at: {this.state.eventStart}</p>
-                    <p>Ends at: {this.state.eventEnd}</p>
-                    <p>Where? {this.state.eventLocation}</p>
+                    <div className="event-read">
+                        <h4>
+                            <TitleIcon color={iconColor} style={style.iconRead}/>
+                            {this.state.eventTitle}
+                        </h4>
+                        <p>
+                            <DescriptionIcon color={iconColor} style={style.iconRead}/>
+                            {this.state.eventDescription}
+                        </p>
+                        <p>
+                            <DateIcon color={iconColor} style={style.iconRead}/>
+                            {this.state.eventStart}
+                        </p>
+                        <p>
+                            <DateIcon color={iconColor} style={style.iconRead}/>
+                            {this.state.eventEnd}
+                        </p>
+                        <p className="event-link">
+                            <LocationIcon color={iconColor} style={style.iconRead}/>
+                            <a href={locLink} target="_blank">{this.state.eventLocation}</a>
+                            <FontAwesome name="external-link"/>
+                        </p>
+                    </div>
                 </Dialog>
             )
         }
 
         return (
-            <div>
+            <div className="dialog-event">
                 {content}
                 {error}
             </div>

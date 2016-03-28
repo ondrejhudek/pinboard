@@ -8,8 +8,10 @@
 @import "components/menu";
 @import "components/calendar";
 @import "components/material-ui";
+@import "components/dialog";
 
 /** views **/
 @import "views/home";
+@import "views/dashboard";
 @import "views/auth";
 @import "views/todo";

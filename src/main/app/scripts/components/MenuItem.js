@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { MenuItem as MaterialMenuItem } from 'material-ui'
-import FontAwesome from 'react-fontawesome'
 
 const style = {
     inner: {

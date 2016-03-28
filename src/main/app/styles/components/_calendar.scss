@@ -15,6 +15,10 @@
     .rbc-event {
         background-color: $brand-blue;
         border-radius: 2px;
+
+        &.rbc-selected {
+            background-color: $brand-blue;
+        }
     }
 
     .rbc-btn-group {

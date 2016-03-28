@@ -1,0 +1,30 @@
+
+.event-read {
+    h4 {
+        margin-top: 0;
+        padding-bottom: 5px;
+        @include bordered-list(#ddd);
+    }
+
+    p {
+        padding-bottom: 5px;
+        @include bordered-list(#eee);
+    }
+
+    .event-link {
+        a {
+            color: #222;
+            text-decoration: none;
+
+            &:hover, &:focus {
+                text-decoration: underline;
+            }
+        }
+
+        .fa {
+            margin-left: 8px;
+            font-size: 12px;
+            color: #333;
+        }
+    }
+}

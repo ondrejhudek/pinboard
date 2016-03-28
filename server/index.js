@@ -27,7 +27,7 @@ app.post('/api/users', (req, res) => {
     const eventType = req.body.event
     if (!eventType) return
 
-    switch (eventType) {
+    switch (eventType) {        
         case 'GET_BY_EMAIL':
             getUserByEmail(res, req.body.data)
             break

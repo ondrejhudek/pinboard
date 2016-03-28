@@ -16,5 +16,5 @@ export const getDatetime = (date, time) => {
  * @returns {String}
  */
 export const getFormatedDate = (date) => {
-    return moment(date).format('DD/MM/YYYY h:mm a')
+    return moment(date).format('DD/MM/YYYY [at] h:mm a')
 }

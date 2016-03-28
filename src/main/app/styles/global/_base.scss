@@ -6,3 +6,7 @@ $brand-gray: #ccc;
 $button-default: #fff;
 $button-primary: #ff4081;
 $button-secondary: #00bcd4;
+
+@mixin bordered-list($color) {
+    border-bottom: 1px dotted $color;
+}

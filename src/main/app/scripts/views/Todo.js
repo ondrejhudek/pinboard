@@ -11,7 +11,7 @@ class TodoView extends React.Component {
     render() {
         return (
             <div className="view-todo">
-                <h2>To-Do lists</h2>
+                <h2>Todo lists</h2>
 
                 <AddTodo />
 
