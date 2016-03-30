@@ -6,7 +6,7 @@ import Menu from '../components/Menu'
 
 class Sidebar extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             open: true

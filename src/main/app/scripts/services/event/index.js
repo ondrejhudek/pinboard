@@ -42,13 +42,13 @@ export default {
             .then(text => text)
             .catch(err => console.log(err))
     },
-    
+
     removeNote(event){
         return fetch(API_EVENTS, {
-                method: 'POST',
-                headers: API_HEADER,
-                body: JSON.stringify({event: 'REMOVE', data: {id: event.objectId}})
-            })
+            method: 'POST',
+            headers: API_HEADER,
+            body: JSON.stringify({event: 'REMOVE', data: {id: event.objectId}})
+        })
             .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
             .then(text => text)
             .catch(err => console.log(err))

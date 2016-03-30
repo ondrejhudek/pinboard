@@ -73,7 +73,7 @@ class DashboardView extends React.Component {
                 </Card>
 
                 <Card className="card">
-                    <CardTitle className="card-title" title="At the moment in the application there are in overall:"/>
+                    <CardTitle className="card-title" title="At the moment in the application there are overall"/>
 
                     <CardText className="card-text">
                         <GridList cellHeight={120} cols={4} padding={10} className="grid-list">

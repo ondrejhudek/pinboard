@@ -4,10 +4,10 @@ import auth from '../services/auth/login'
 
 import Layout from '../layouts/Layout'
 
+/* views */
 import HomeView from '../views/Home'
 import LostPasswordView from '../views/LostPassword'
 import DashboardView from '../views/Dashboard'
-import SampleView from '../views/Sample'
 import NoteView from '../views/Note'
 import TodoView from '../views/Todo'
 import CalendarView from '../views/Calendar'
@@ -39,7 +39,6 @@ export default (
         <Route path="signout" component={LogoutComponent}/>
         <Route path='lost-password' component={LostPasswordView} onEnter={notRequireAuth}/>
         <Route path='dashboard' component={DashboardView} onEnter={requireAuth}/>
-        <Route path='sample' component={SampleView} onEnter={requireAuth}/>
         <Route path='note' component={NoteView} onEnter={requireAuth}/>
         <Route path='todo' component={TodoView} onEnter={requireAuth}/>
         <Route path='calendar' component={CalendarView} onEnter={requireAuth}/>

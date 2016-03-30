@@ -72,3 +72,15 @@ a {
     margin: 35px;
     z-index: 5;
 }
+
+/**
+ * Browsehappy
+ */
+.browsehappy {
+    margin: 50px 15%;
+    padding: 50px 30px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12);
+    border-radius: 2px;
+}

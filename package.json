@@ -1,7 +1,7 @@
 {
   "name": "HudyApp",
   "version": "1.0.0",
-  "description": "Diploma thesis React application",
+  "description": "React application for diploma thesis",
   "private": true,
   "dependencies": {
     "body-parser": "^1.15.0",

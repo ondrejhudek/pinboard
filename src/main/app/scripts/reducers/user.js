@@ -12,7 +12,7 @@ const user = (state, action) => {
     switch (action.type) {
         case 'RECEIVE_USER':
             return getModel(state)
-        
+
         case 'UPDATE_USER':
             return getModel(state)
 

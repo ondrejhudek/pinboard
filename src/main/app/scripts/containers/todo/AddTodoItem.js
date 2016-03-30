@@ -10,11 +10,11 @@ const style = {
     }
 }
 
-let AddTodoItem = ({ dispatch, id, objectId }) => {
+let AddTodoItem = ({dispatch, id, objectId}) => {
     const handleAdd = (e) => {
         const value = e.target.value.trim()
 
-        if(!value) return
+        if (!value) return
         dispatch(addTodoItem(id, objectId, value))
         e.target.value = ''
     }

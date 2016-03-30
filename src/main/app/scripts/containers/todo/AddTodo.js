@@ -5,7 +5,7 @@ import AddIcon from 'material-ui/lib/svg-icons/content/add'
 
 import { addTodo } from '../../actions/todos'
 
-let AddTodo = ({ dispatch }) => {
+let AddTodo = ({dispatch}) => {
     const handleAdd = () => {
         dispatch(addTodo())
     }

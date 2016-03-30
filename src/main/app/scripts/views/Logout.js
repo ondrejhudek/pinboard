@@ -5,6 +5,10 @@ import { Card, FlatButton } from 'material-ui'
 import auth from '../services/auth/login'
 
 class Logout extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    
     componentDidMount() {
         auth.logout()
     }
@@ -23,6 +27,6 @@ class Logout extends React.Component {
 
 Logout.contextTypes = {
     router: React.PropTypes.object.isRequired
-};
+}
 
 export default Logout

@@ -24,7 +24,7 @@ class Menu extends React.Component {
                 <Divider />
                 <MenuItem route="signout" text="Sign out" icon={LogoutIcon}/>
             </div>
-        );
+        )
     }
 }
 

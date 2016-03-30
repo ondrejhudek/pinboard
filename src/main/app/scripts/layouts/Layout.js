@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 import Sidebar from '../components/Siderbar'
 
-function Layout({ children }) {
+function Layout({children}) {
     let appendSidebar = true;
     const noSidebarViews = ['signin', 'signout', 'lost-password', '404'];
 
@@ -27,6 +27,6 @@ function Layout({ children }) {
 
 Layout.propTypes = {
     children: PropTypes.element
-};
+}
 
 export default Layout
