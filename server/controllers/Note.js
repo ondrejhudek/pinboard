@@ -85,7 +85,7 @@ export const updateNote = (res, data) => {
 }
 
 export const removeNote = (res, data) => {
-    Note.remove({ _id: data.id }, (err) => {
+    Note.remove({_id: data.id}, (err) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)

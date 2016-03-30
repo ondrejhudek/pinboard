@@ -11,7 +11,8 @@ const style = {
         width: '32%',
         margin: '0.5%',
         border: '1px solid #eee',
-        borderRadius: 2
+        borderRadius: 2,
+        overflow: 'inherit'
     },
     title: {
         paddingTop: 8,
@@ -64,7 +65,7 @@ let Note = ({ dispatch, id, _id, title, body }) => {
 
     return (
         <GridTile style={style.gridTile}>
-            <Card style={style.card}>
+            <Card>
                 <CardTitle children={<TitleField />} style={style.title}/>
                 <CardText children={<BodyField />} style={style.body}/>
                 <CardActions style={style.action}>

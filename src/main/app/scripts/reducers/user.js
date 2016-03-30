@@ -12,6 +12,9 @@ const user = (state, action) => {
     switch (action.type) {
         case 'RECEIVE_USER':
             return getModel(state)
+        
+        case 'UPDATE_USER':
+            return getModel(state)
 
         default:
             return state
@@ -28,6 +31,12 @@ const users = (state = {isFetching: false, data: {}}, action) => {
         case 'RECEIVE_USER':
             return Object.assign({}, state, {
                 isFetching: false,
+                data: user(action.user, action),
+                lastUpdated: action.receivedAt
+            })
+
+        case 'UPDATE_USER':
+            return Object.assign({}, state, {
                 data: user(action.user, action),
                 lastUpdated: action.receivedAt
             })

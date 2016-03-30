@@ -1,19 +1,18 @@
-import React, {PropTypes} from 'react'
-import {connect} from 'react-redux'
+import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import {Dialog, FlatButton, TextField, DatePicker, TimePicker, Snackbar} from 'material-ui'
+import { Dialog, FlatButton, TextField, DatePicker, TimePicker, Snackbar } from 'material-ui'
 import Colors from 'material-ui/lib/styles/colors'
 import FontAwesome from 'react-fontawesome'
 
-import EventIcon from 'material-ui/lib/svg-icons/action/event'
 import TitleIcon from 'material-ui/lib/svg-icons/editor/text-fields'
 import DescriptionIcon from 'material-ui/lib/svg-icons/action/description'
 import DateIcon from 'material-ui/lib/svg-icons/action/date-range'
 import TimeIcon from 'material-ui/lib/svg-icons/device/access-time'
 import LocationIcon from 'material-ui/lib/svg-icons/communication/location-on'
 
-import {fetchAdd, updateEvent, removeEvent} from '../../actions/events'
-import {getDatetime, getFormatedDate} from '../../components/Util'
+import { addEvent, updateEvent, removeEvent } from '../../actions/events'
+import { getDatetime, getFormatedDate } from '../../components/Util'
 
 const style = {
     column: {
@@ -182,7 +181,7 @@ class EventDialog extends React.Component {
             location: this.state.eventLocation
         }
 
-        this.state.dispatch(fetchAdd(event))
+        this.state.dispatch(addEvent(event))
         this.close()
         this.cleanEventState()
     }

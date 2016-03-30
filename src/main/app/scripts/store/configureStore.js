@@ -8,7 +8,7 @@ import auth from '../services/auth/login'
 import DevTools from './../containers/DevTools'
 import rootReducer from '../reducers'
 
-import { fetchUser } from '../actions/user'
+import { getUser } from '../actions/user'
 
 const loggerMiddleware = createLogger()
 const middleware = syncHistory(browserHistory)
@@ -26,7 +26,7 @@ const store = finalCreateStore(rootReducer)
 middleware.listenForReplays(store)
 
 if (auth.loggedIn()) {
-    store.dispatch(fetchUser())
+    store.dispatch(getUser())
 }
 
 export default store

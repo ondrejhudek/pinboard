@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import CircularProgress from 'material-ui/lib/circular-progress'
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
+import { Card, CardText } from 'material-ui'
 
 import EventDialog from './EventDialog'
 
@@ -11,8 +12,11 @@ BigCalendar.setLocalizer(
 )
 
 const style = {
+    cardText: {
+      fontSize: 'inherit'
+    },
     calendar: {
-        height: 700
+        height: 800
     }
 }
 
@@ -28,7 +32,7 @@ class Calendar extends React.Component {
         this.onSelectEvent = this.onSelectEvent.bind(this)
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
         this.setState({events: nextProps.events, isFetching: nextProps.isFetching})
     }
 
@@ -39,13 +43,17 @@ class Calendar extends React.Component {
     render() {
         return (
             <div>
-                <div className="state-fetching" id={this.state.isFetching ? 'show' : ''}>
-                    <CircularProgress />
-                </div>
+                <Card>
+                    <CardText style={style.cardText}>
+                        <div className="state-fetching" id={this.state.isFetching ? 'show' : ''}>
+                            <CircularProgress />
+                        </div>
 
-                <div className={this.state.isFetching ? 'hide' : ''}>
-                    <BigCalendar events={this.state.events} onSelectEvent={this.onSelectEvent} startAccessor='startDate' endAccessor='endDate' style={style.calendar} className="big-calendar"/>
-                </div>
+                        <div className={this.state.isFetching ? 'hide' : ''}>
+                            <BigCalendar events={this.state.events} onSelectEvent={this.onSelectEvent} startAccessor='startDate' endAccessor='endDate' style={style.calendar} className="big-calendar"/>
+                        </div>
+                    </CardText>
+                </Card>
 
                 <EventDialog ref="dialog"/>
             </div>

@@ -4,10 +4,7 @@ import { Card, TextField, FlatButton, RaisedButton } from 'material-ui'
 
 import auth from '../../services/auth/login'
 import RegistrationDialog from './RegistrationDialog'
-import { fetchCurrentUser, fetchUsersCount } from '../../actions/user'
-import { fetchNotes } from '../../actions/notes'
-import { fetchTodos } from '../../actions/todos'
-import { fetchEvents } from '../../actions/events'
+import { getUser } from '../../actions/user'
 
 class Login extends React.Component {
     constructor(props) {
@@ -60,11 +57,7 @@ class Login extends React.Component {
                 this.context.router.replace('/')
             }
 
-            this.state.dispatch(fetchCurrentUser())
-            this.state.dispatch(fetchUsersCount())
-            this.state.dispatch(fetchNotes())
-            this.state.dispatch(fetchTodos())
-            this.state.dispatch(fetchEvents())
+            this.state.dispatch(getUser())
         })
     }
 

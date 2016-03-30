@@ -72,7 +72,7 @@ export const createUser = (res, data) => {
 }
 
 export const updateUser = (res, data) => {
-    User.findById(data.id, (err, doc) => {
+    User.findById(data._id, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
@@ -80,13 +80,14 @@ export const updateUser = (res, data) => {
 
         doc.firstname = data.firstname
         doc.lastname = data.lastname
+        
         doc.save((err) => {
             if (err) {
                 console.log(err)
                 res.status(400).send(err)
             }
+
+            res.status(200).send('OK')
         })
     })
-
-    res.status(200).send('OK')
 }

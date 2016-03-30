@@ -11,6 +11,7 @@ import SampleView from '../views/Sample'
 import NoteView from '../views/Note'
 import TodoView from '../views/Todo'
 import CalendarView from '../views/Calendar'
+import SettingsView from '../views/Settings'
 import NotFoundView from '../views/NotFound'
 import LogoutComponent from '../views/Logout'
 
@@ -42,6 +43,7 @@ export default (
         <Route path='note' component={NoteView} onEnter={requireAuth}/>
         <Route path='todo' component={TodoView} onEnter={requireAuth}/>
         <Route path='calendar' component={CalendarView} onEnter={requireAuth}/>
+        <Route path='settings' component={SettingsView} onEnter={requireAuth}/>
         <Route path='404' component={NotFoundView}/>
         <Redirect from='*' to='/404'/>
     </Route>

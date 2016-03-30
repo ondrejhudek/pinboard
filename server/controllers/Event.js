@@ -66,18 +66,18 @@ export const createEvent = (res, data) => {
     })
 }
 
-export const updateEvent = (res, data) => {
-    Event.findById(data.id, (err, doc) => {
+export const updateEvent = (res, data) => {    
+    Event.findById(data.objectId, (err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
 
-        doc.title = data.event.title
-        doc.description = data.event.description
-        doc.startDate = data.event.startDate
-        doc.endDate = data.event.endDate
-        doc.location = data.event.location
+        doc.title = data.title
+        doc.description = data.description
+        doc.startDate = data.startDate
+        doc.endDate = data.endDate
+        doc.location = data.location
 
         doc.save((err) => {
             if (err) {
@@ -91,7 +91,7 @@ export const updateEvent = (res, data) => {
 }
 
 export const removeEvent = (res, data) => {
-    Event.remove({ _id: data.id }, (err) => {
+    Event.remove({_id: data.id}, (err) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)

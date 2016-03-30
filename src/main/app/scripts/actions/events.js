@@ -1,13 +1,7 @@
-import 'isomorphic-fetch'
-
-import { API_EVENTS, API_HEADER } from '../../../../../config'
-import auth from '../services/auth/login'
+import service from '../services/event'
 
 let nextEventId = 0
 
-/**
- * EVENTS
- */
 /* request and receive events */
 const requestEvents = () => {
     return {
@@ -29,46 +23,36 @@ const receiveEvents = (json) => {
 export const fetchEvents = () => {
     return dispatch => {
         dispatch(requestEvents())
-        return fetch(API_EVENTS, {
-            method: 'POST',
-            headers: API_HEADER,
-            body: JSON.stringify({event: 'GET', data: {userId: auth.getUserId()}})
-        })
-            .then(response => response.ok ? response.json() : response.json().then(err => Promise.reject(err)))
-            .then(json => dispatch(receiveEvents(json)))
-            .catch(err => console.log(err))
+
+        service.fetchEvents()
+            .then((data) => dispatch(receiveEvents(data)))
+            .catch((error) => console.log(error))
     }
 }
 
 /* add event */
-const addEvent = (objectId, event) => {
-    event.user_id = auth.getUserId()
-    event.id = nextEventId++
-    event._id = objectId
-
-    return {
-        type: 'ADD_EVENT',
-        event,
-        date: Date.now()
-    }
-}
-
-export const fetchAdd = (event) => {
+export const addEvent = (event) => {
     return dispatch => {
-        return fetch(API_EVENTS, {
-            method: 'POST',
-            headers: API_HEADER,
-            body: JSON.stringify({event: 'CREATE', data: {userId: auth.getUserId(), event}})
-        })
-            .then(response => response.ok ? response.json() : response.json().then(err => Promise.reject(err)))
-            .then(json => dispatch(addEvent(json, event)))
-            .catch(err => console.log(err))
+        service.createEvent(event)
+            .then((data) => {
+                event._id = data.id
+                event.user_id = data.userId
+                event.id = nextEventId++
+
+                dispatch({
+                    type: 'ADD_EVENT',
+                    event,
+                    date: Date.now()
+                })
+            })
+            .catch((error) => console.log(error))
     }
 }
 
 /* update event */
 export const updateEvent = (event) => {
-    fetchUpdate(event)
+    service.updateNote(event)
+
     return {
         type: 'UPDATE_EVENT',
         event,
@@ -76,34 +60,13 @@ export const updateEvent = (event) => {
     }
 }
 
-const fetchUpdate = (event) => {
-    return fetch(API_EVENTS, {
-        method: 'POST',
-        headers: API_HEADER,
-        body: JSON.stringify({event: 'UPDATE', data: {id: event.objectId, event}})
-    })
-        .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
-        .then(text => text)
-        .catch(err => console.log(err))
-}
-
 /* remove event */
 export const removeEvent = (event) => {
-    fetchRemove(event)
+    service.removeNote(event)
+
     return {
         type: 'REMOVE_EVENT',
         event,
         date: Date.now()
     }
-}
-
-const fetchRemove = (event) => {
-    return fetch(API_EVENTS, {
-        method: 'POST',
-        headers: API_HEADER,
-        body: JSON.stringify({event: 'REMOVE', data: {id: event.objectId}})
-    })
-        .then(response => response.ok ? response.text() : response.text().then(err => Promise.reject(err)))
-        .then(text => text)
-        .catch(err => console.log(err))
 }

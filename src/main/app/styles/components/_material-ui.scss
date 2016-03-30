@@ -5,3 +5,12 @@
     max-width: 500px;
     text-align: center;
 }
+
+.card-title, .card-text {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+}
+
+.card-text {
+    font-size: inherit !important;
+}

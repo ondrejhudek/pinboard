@@ -12,7 +12,11 @@ const style = {
         margin: '0.5%',
         verticalAlign: 'top',
         border: '1px solid #eee',
-        borderRadius: 2
+        borderRadius: 2,
+        overflow: 'inherit'
+    },
+    list: {
+        boxShadow: '0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12)'
     },
     subheader: {
         paddingTop: 5,
@@ -30,29 +34,12 @@ const style = {
 const Todo = ({ id, _id, todos, filter }) => {
     return (
         <GridTile style={style.gridTile}>
-            <List subheader={<AddTodoItem id={id} objectId={_id}/>} subheaderStyle={style.subheader}>
+            <List style={style.list} subheader={<AddTodoItem id={id} objectId={_id}/>} subheaderStyle={style.subheader}>
                 <VisibleTodoList id={id} objectId={_id} filter={filter} items={todos}/>
                 <ListItem children={<Footer key={id} id={id} objectId={_id} filter={filter}/>} disabled={true} style={style.footer}/>
             </List>
         </GridTile>
     )
-
-
-    //return (
-    //    <div className="todo-pin">
-    //        <List subheader={<AddTodoItem id={id} objectId={_id}/>} subheaderStyle={style.subheader}>
-    //            <VisibleTodoList id={id} objectId={_id} filter={filter} items={todos}/>
-    //            <ListItem children={<Footer key={id} id={id} objectId={_id} filter={filter}/>} disabled={true} style={style.footer}/>
-    //        </List>
-    //    </div>
-    //)
-
-    //return (
-    //    <List subheader={<AddTodoItem id={id} objectId={_id}/>} subheaderStyle={style.subheader}>
-    //        <VisibleTodoList id={id} objectId={_id} filter={filter} items={todos}/>
-    //        <ListItem children={<Footer key={id} id={id} objectId={_id} filter={filter}/>} disabled={true} style={style.footer}/>
-    //    </List>
-    //)
 }
 
 Todo.propTypes = {

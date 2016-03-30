@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { FloatingActionButton } from 'material-ui'
 import AddIcon from 'material-ui/lib/svg-icons/content/add'
 
-import { fetchAdd } from '../../actions/todos'
+import { addTodo } from '../../actions/todos'
 
 let AddTodo = ({ dispatch }) => {
     const handleAdd = () => {
-        dispatch(fetchAdd())
+        dispatch(addTodo())
     }
 
     return (

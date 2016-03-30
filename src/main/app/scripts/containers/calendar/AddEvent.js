@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { FloatingActionButton } from 'material-ui'
 import AddIcon from 'material-ui/lib/svg-icons/content/add'

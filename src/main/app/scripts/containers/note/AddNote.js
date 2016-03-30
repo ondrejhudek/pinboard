@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { TextField, RaisedButton } from 'material-ui'
 
-import { fetchCreate } from '../../actions/notes'
+import { addNote } from '../../actions/notes'
 
 const style = {
     colTextfield: {
@@ -22,7 +22,7 @@ let AddNote = ({ dispatch }) => {
         const value = e.target.newNote.value
 
         if (!value) return
-        dispatch(fetchCreate(value))
+        dispatch(addNote(value))
         e.target.newNote.value = ''
     }
 

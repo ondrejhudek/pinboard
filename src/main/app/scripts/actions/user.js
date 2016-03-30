@@ -1,11 +1,5 @@
-import 'isomorphic-fetch'
+import service from '../services/user'
 
-import { API_USERS, API_HEADER } from '../../../../../config'
-import auth from '../services/auth/login'
-
-/**
- * NOTES
- */
 /* request and receive current user */
 const requestUser = () => {
     return {
@@ -21,16 +15,22 @@ const receiveUser = (user) => {
     }
 }
 
-export const fetchUser = () => {
+export const getUser = () => {
     return dispatch => {
         dispatch(requestUser())
-        return fetch(API_USERS, {
-            method: 'POST',
-            headers: API_HEADER,
-            body: JSON.stringify({event: 'GET_BY_ID', data: {id: auth.getUserId()}})
-        })
-            .then(response => response.ok ? response.json() : response.json().then(err => Promise.reject(err)))
-            .then(json => dispatch(receiveUser(json)))
-            .catch(err => console.log(err))
+
+        service.fetchUser()
+            .then((data) => dispatch(receiveUser(data)))
+            .catch((error) => console.log(error))
+    }
+}
+
+export const updateUser = (user) => {
+    service.updateUser(user)
+    
+    return {
+        type: 'UPDATE_USER',
+        user,
+        receivedAt: Date.now()
     }
 }

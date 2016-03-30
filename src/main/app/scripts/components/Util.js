@@ -23,6 +23,14 @@ export const getFormatedDate = (date) => {
 }
 
 /**
+ * Get formatted actual date and time for welcome card
+ * @returns {string}
+ */
+export const getWelcomeDate = () => {
+    return moment().format('[Today is] dddd, MMMM Do YYYY, h:mm:ss a')
+}
+
+/**
  * Encrypt password
  * @param string
  * @returns {string}
