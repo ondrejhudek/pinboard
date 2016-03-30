@@ -11,6 +11,17 @@ export const getAllEvents = (res) => {
     })
 }
 
+export const countEvents = (res) => {
+    Event.count((err, doc) => {
+        if (err) {
+            console.log(err)
+            res.status(400).send(err)
+        }
+
+        res.json(doc)
+    })
+}
+
 export const getEvents = (res, data) => {
     Event.find({
         'user_id': data.userId

@@ -11,6 +11,17 @@ export const getAllTodos = (res) => {
     })
 }
 
+export const countTodos = (res) => {
+    Todo.count((err, doc) => {
+        if (err) {
+            console.log(err)
+            res.status(400).send(err)
+        }
+
+        res.json(doc)
+    })
+}
+
 export const getTodos = (res, data) => {
     Todo.find({
         'user_id': data.userId

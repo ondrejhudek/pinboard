@@ -11,6 +11,17 @@ export const getAllNotes = (res) => {
     })
 }
 
+export const countNotes = (res) => {
+    Note.count((err, doc) => {
+        if (err) {
+            console.log(err)
+            res.status(400).send(err)
+        }
+
+        res.json(doc)
+    })
+}
+
 export const getNotes = (res, data) => {
     Note.find({
         'user_id': data.userId

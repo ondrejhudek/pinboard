@@ -1,8 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Card, CardText } from 'material-ui'
 
 import AddNote from '../containers/note/AddNote'
 import Notes from '../components/note/Notes'
+
+import { fetchNotes } from '../actions/notes'
+let fetched = false
 
 const style = {
     headerCard: {
@@ -16,6 +20,17 @@ const style = {
 class NoteView extends React.Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            dispatch: props.dispatch
+        }
+    }
+
+    componentWillMount() {
+        if (!fetched) {
+            this.state.dispatch(fetchNotes())
+            fetched = true
+        }
     }
 
     render() {
@@ -32,5 +47,7 @@ class NoteView extends React.Component {
         )
     }
 }
+
+NoteView = connect()(NoteView)
 
 export default NoteView

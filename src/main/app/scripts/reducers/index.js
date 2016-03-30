@@ -1,16 +1,18 @@
 import { combineReducers } from 'redux'
 import { routeReducer } from 'react-router-redux'
 
-import users from './users'
+import user from './user'
 import notes from './notes'
 import todos from './todos'
 import events from './events'
+import stats from './stats'
 
 const rootReducer = combineReducers({
-    users,
+    user,
     notes,
     todos,
     events,
+    stats,
     routing: routeReducer
 })
 
