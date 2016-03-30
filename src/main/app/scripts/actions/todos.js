@@ -2,7 +2,7 @@ import 'isomorphic-fetch'
 import shortid from 'shortid'
 
 import { API_TODOS, API_HEADER } from '../../../../../config'
-import auth from '../services/auth/index'
+import auth from '../services/auth/login'
 
 let nextTodoId = 0
 

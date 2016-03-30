@@ -4,8 +4,10 @@ import CircularProgress from 'material-ui/lib/circular-progress'
 
 import Note from './Note'
 
-let Notes = ({ notes, isFetching }) => {
-    notes.sort((a, b) => { return b.id - a.id })
+let Notes = ({notes, isFetching}) => {
+    notes.sort((a, b) => {
+        return b.id - a.id
+    })
 
     return (
         <div>

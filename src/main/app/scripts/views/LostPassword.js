@@ -1,8 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router'
-import { Card, FlatButton, RaisedButton, Snackbar } from 'material-ui'
-
-import auth from '../services/auth/index'
+import {Link} from 'react-router'
+import {Card, FlatButton, RaisedButton, Snackbar} from 'material-ui'
 
 class LostPassword extends React.Component {
     constructor(props) {

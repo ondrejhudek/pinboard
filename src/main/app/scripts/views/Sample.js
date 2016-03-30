@@ -2,7 +2,7 @@ import React from 'react'
 import 'isomorphic-fetch'
 
 import { API_NOTES, API_TODOS, API_HEADER } from '../../../../../config'
-import auth from '../services/auth/index'
+import auth from '../services/auth/login'
 
 const userId = auth.getUserId()
 

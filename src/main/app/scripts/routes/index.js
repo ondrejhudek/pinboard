@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, IndexRoute, Redirect } from 'react-router'
-import auth from '../services/auth/index'
+import auth from '../services/auth/login'
 
 import Layout from '../layouts/Layout'
 
@@ -18,7 +18,7 @@ function requireAuth(nextState, replace) {
     if (!auth.loggedIn()) {
         replace({
             pathname: '/signin',
-            state: { nextPathname: nextState.location.pathname }
+            state: {nextPathname: nextState.location.pathname}
         })
     }
 }
@@ -27,7 +27,7 @@ function notRequireAuth(nextState, replace) {
     if (auth.loggedIn()) {
         replace({
             pathname: '/',
-            state: { nextPathname: nextState.location.pathname }
+            state: {nextPathname: nextState.location.pathname}
         })
     }
 }

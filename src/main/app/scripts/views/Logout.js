@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import { Card, FlatButton } from 'material-ui'
 
-import auth from '../services/auth/index'
+import auth from '../services/auth/login'
 
 class Logout extends React.Component {
     componentDidMount() {

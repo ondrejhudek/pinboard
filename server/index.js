@@ -3,10 +3,10 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-import { getAllUsers, getUserByEmail, createUser, updateUser } from './controllers/User'
-import { getAllNotes, getNotes, getNote, createNote, updateNote, removeNote } from './controllers/Note'
-import { getAllTodos, getTodos, getTodo, createTodo, removeTodo, addItem, toggleItem, removeItem } from './controllers/Todo'
-import { getAllEvents, getEvents, getEvent, createEvent, updateEvent, removeEvent } from './controllers/Event'
+import { getAllUsers, countUsers, existsEmail, getUserById, getUserByEmail, createUser, updateUser } from './controllers/User'
+import { getAllNotes, countNotes, getNotes, getNote, createNote, updateNote, removeNote } from './controllers/Note'
+import { getAllTodos, countTodos, getTodos, getTodo, createTodo, removeTodo, addItem, toggleItem, removeItem } from './controllers/Todo'
+import { getAllEvents, countEvents, getEvents, getEvent, createEvent, updateEvent, removeEvent } from './controllers/Event'
 
 import { DB_ENDPOINT } from '../config'
 
@@ -27,7 +27,19 @@ app.post('/api/users', (req, res) => {
     const eventType = req.body.event
     if (!eventType) return
 
-    switch (eventType) {        
+    switch (eventType) {
+        case 'COUNT':
+            countUsers(res)
+            break
+        
+        case 'EXISTS_EMAIL':
+            existsEmail(res, req.body.data)
+            break
+
+        case 'GET_BY_ID':
+            getUserById(res, req.body.data)
+            break
+
         case 'GET_BY_EMAIL':
             getUserByEmail(res, req.body.data)
             break
@@ -55,6 +67,10 @@ app.post('/api/notes', (req, res) => {
     if (!eventType) res.status(400).send('Event type is missing in a request.')
 
     switch (eventType) {
+        case 'COUNT':
+            countNotes(res)
+            break
+
         case 'GET':
             getNotes(res, req.body.data)
             break
@@ -90,6 +106,10 @@ app.post('/api/todos', (req, res) => {
     if (!eventType) res.status(400).send('Event type is missing in a request.')
 
     switch (eventType) {
+        case 'COUNT':
+            countTodos(res)
+            break
+
         case 'GET':
             getTodos(res, req.body.data)
             break
@@ -133,6 +153,10 @@ app.post('/api/events', (req, res) => {
     if (!eventType) res.status(400).send('Event type is missing in a request.')
 
     switch (eventType) {
+        case 'COUNT':
+            countEvents(res)
+            break
+
         case 'GET':
             getEvents(res, req.body.data)
             break

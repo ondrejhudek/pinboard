@@ -1,7 +1,10 @@
 import React from 'react'
-import {Link} from 'react-router'
-import {connect} from 'react-redux'
-import {GridList, GridTile} from 'material-ui'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { GridList, GridTile } from 'material-ui'
+
+import { fetchStats } from '../actions/stats'
+let fetched = false
 
 const style = {
     tile: {
@@ -14,19 +17,27 @@ class DashboardView extends React.Component {
         super(props)
 
         this.state = {
-            usersCount: props.usersCount,
-            notesCount: props.notesCount,
-            todosCount: props.todosCount,
-            eventsCount: props.eventsCount
+            dispatch: props.dispatch,
+            users: {total: props.users.total},
+            notes: {total: props.notes.total},
+            todos: {total: props.todos.total},
+            events: {total: props.events.total}
+        }
+    }
+
+    componentWillMount() {
+        if (!fetched) {
+            this.state.dispatch(fetchStats())
+            fetched = true
         }
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            usersCount: nextProps.usersCount,
-            notesCount: nextProps.notesCount,
-            todosCount: nextProps.todosCount,
-            eventsCount: nextProps.eventsCount
+            users: {total: nextProps.users.total},
+            notes: {total: nextProps.notes.total},
+            todos: {total: nextProps.todos.total},
+            events: {total: nextProps.events.total}
         })
     }
 
@@ -45,19 +56,22 @@ class DashboardView extends React.Component {
 
                 <GridList cellHeight={120} cols={4} padding={10} className="grid-list">
                     <GridTile style={style.tile} className="tile tile-one">
-                        <h4>{this.state.usersCount}</h4>
+                        <h4>{this.state.users.total}</h4>
                         <p>registered users</p>
                     </GridTile>
+
                     <GridTile style={style.tile} className="tile tile-two">
-                        <h4>{this.state.notesCount}</h4>
+                        <h4>{this.state.notes.total}</h4>
                         <p>notes</p>
                     </GridTile>
+
                     <GridTile style={style.tile} className="tile tile-three">
-                        <h4>{this.state.todosCount}</h4>
+                        <h4>{this.state.todos.total}</h4>
                         <p>todo lists</p>
                     </GridTile>
+
                     <GridTile style={style.tile} className="tile tile-four">
-                        <h4>{this.state.eventsCount}</h4>
+                        <h4>{this.state.events.total}</h4>
                         <p>events</p>
                     </GridTile>
                 </GridList>
@@ -68,10 +82,10 @@ class DashboardView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        usersCount: state.users.items.length,
-        notesCount: state.notes.items.length,
-        todosCount: state.todos.items.length,
-        eventsCount: state.events.items.length
+        users: {total: state.stats.users.total},
+        notes: {total: state.stats.notes.total},
+        todos: {total: state.stats.todos.total},
+        events: {total: state.stats.events.total}
     }
 }
 

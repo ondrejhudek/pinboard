@@ -10,3 +10,10 @@ $button-secondary: #00bcd4;
 @mixin bordered-list($color) {
     border-bottom: 1px dotted $color;
 }
+
+@mixin error-message($margin){
+    display: none;
+    margin: $margin;
+    background-color: #EF5350 !important;
+    color: #fff;
+}

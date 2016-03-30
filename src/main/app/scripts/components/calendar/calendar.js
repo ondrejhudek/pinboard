@@ -47,7 +47,7 @@ class Calendar extends React.Component {
                     <BigCalendar events={this.state.events} onSelectEvent={this.onSelectEvent} startAccessor='startDate' endAccessor='endDate' style={style.calendar} className="big-calendar"/>
                 </div>
 
-                <EventDialog ref="dialog" className="dialoooooooog"/>
+                <EventDialog ref="dialog"/>
             </div>
         )
     }

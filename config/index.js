@@ -15,5 +15,11 @@ export const API_EVENTS = API_ENDPOINT + '/events'
 export const API_HEADER = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
 
 /** GLOBAL VARIABLES **/
-export const __DEBUG = false
+export const __DEBUG = true
 export const __ENV = 'dev'
+
+/** GOOGLE RECAPTCHA **/
+export const SITEKEY = '6LeQBBwTAAAAAIbQbKPQENWw6bvZf5OH3qB66ux0'
+
+/** PASSWORD ENCRYPTION/DECRYPTION **/
+export const SECRET_KEY = 'ondrejhudek'

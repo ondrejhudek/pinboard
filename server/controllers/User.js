@@ -11,6 +11,39 @@ export const getAllUsers = (res) => {
     })
 }
 
+export const countUsers = (res) => {
+    User.count((err, doc) => {
+        if (err) {
+            console.log(err)
+            res.status(400).send(err)
+        }
+
+        res.json(doc)
+    })
+}
+
+export const existsEmail = (res, data) => {
+    User.count({ 'email': data.email }, (err, doc) => {
+        if (err) {
+            console.log(err)
+            res.status(400).send(err)
+        }
+
+        res.json(doc !== 0)
+    })
+}
+
+export const getUserById = (res, data) => {
+    User.findById(data.id, (err, doc) => {
+        if (err) {
+            console.log(err)
+            res.status(400).send(err)
+        }
+
+        res.json(doc)
+    })
+}
+
 export const getUserByEmail = (res, data) => {
     User.findOne({ 'email': data.email }, (err, doc) => {
         if (err) {
@@ -25,19 +58,17 @@ export const getUserByEmail = (res, data) => {
 export const createUser = (res, data) => {
     const user = new User({
         email: data.email,
-        firstname: data.firstname,
-        lastname: data.lastname,
         password: data.password
     })
 
-    user.save((err) => {
+    user.save((err, doc) => {
         if (err) {
             console.log(err)
             res.status(400).send(err)
         }
-    })
 
-    res.status(200).send('OK')
+        res.status(200).send(doc._id)
+    })
 }
 
 export const updateUser = (res, data) => {

@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 
 import { API_EVENTS, API_HEADER } from '../../../../../config'
-import auth from '../services/auth/index'
+import auth from '../services/auth/login'
 
 let nextEventId = 0
 

@@ -4,12 +4,11 @@ import { syncHistory } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 
+import auth from '../services/auth/login'
 import DevTools from './../containers/DevTools'
 import rootReducer from '../reducers'
-import { fetchUsers } from '../actions/users'
-import { fetchNotes } from '../actions/notes'
-import { fetchTodos } from '../actions/todos'
-import { fetchEvents } from '../actions/events'
+
+import { fetchUser } from '../actions/user'
 
 const loggerMiddleware = createLogger()
 const middleware = syncHistory(browserHistory)
@@ -17,8 +16,8 @@ const middleware = syncHistory(browserHistory)
 const finalCreateStore = compose(
     applyMiddleware(
         middleware
-        ,thunkMiddleware
-        // ,loggerMiddleware
+        , thunkMiddleware
+        // , loggerMiddleware
     ),
     DevTools.instrument()
 )(createStore)
@@ -26,9 +25,8 @@ const finalCreateStore = compose(
 const store = finalCreateStore(rootReducer)
 middleware.listenForReplays(store)
 
-store.dispatch(fetchUsers())
-store.dispatch(fetchNotes())
-store.dispatch(fetchTodos())
-store.dispatch(fetchEvents())
+if (auth.loggedIn()) {
+    store.dispatch(fetchUser())
+}
 
 export default store

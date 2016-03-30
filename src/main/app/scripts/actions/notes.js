@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 
 import { API_NOTES, API_HEADER } from '../../../../../config'
-import auth from '../services/auth/index'
+import auth from '../services/auth/login'
 
 let nextNoteId = 0
 
