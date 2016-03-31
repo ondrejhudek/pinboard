@@ -61,7 +61,6 @@ const todo = (state, action) => {
             return Object.assign({}, state, {
                 todos: state.todos.map(t => {
                     if (t.id !== action.todo.itemId) return t
-
                     return todoItem(t, action)
                 })
             })
@@ -70,9 +69,7 @@ const todo = (state, action) => {
             if (state.id !== action.todo.id) return state
 
             return Object.assign({}, state, {
-                todos: state.todos.filter(t => {
-                    return (t.id !== action.todo.itemId)
-                })
+                todos: state.todos.find(t => t.id !== action.todo.itemId)
             })
 
         default:
