@@ -69,7 +69,9 @@ const todo = (state, action) => {
             if (state.id !== action.todo.id) return state
 
             return Object.assign({}, state, {
-                todos: state.todos.find(t => t.id !== action.todo.itemId)
+                todos: state.todos.filter(t => {
+                    return (t.id !== action.todo.itemId)
+                })
             })
 
         default:
