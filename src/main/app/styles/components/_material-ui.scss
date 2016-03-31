@@ -1,3 +1,8 @@
+@mixin card-padding() {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+}
+
 /* Card */
 .state-card {
     margin: 50px auto 0;
@@ -6,11 +11,12 @@
     text-align: center;
 }
 
-.card-title, .card-text {
-    padding-left: 25px !important;
-    padding-right: 25px !important;
+.card-title {
+    @include card-padding();
+    background-color: #eee;
 }
 
 .card-text {
+    @include card-padding();
     font-size: inherit !important;
 }

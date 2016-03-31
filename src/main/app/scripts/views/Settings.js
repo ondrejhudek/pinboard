@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, CardText, TextField, RaisedButton } from 'material-ui'
+import { Card, CardTitle, CardText, TextField, RaisedButton } from 'material-ui'
 
 import { updateUser } from '../actions/user'
 
@@ -57,9 +57,11 @@ class SettingsView extends React.Component {
     render() {
         return (
             <div className="view-settings">
-                <h2>Update your personal details</h2>
+                <h2>Account settings</h2>
 
                 <Card>
+                    <CardTitle className="card-title" title="Personal details" subtitle="Update your personal details"/>
+
                     <CardText className="card-text">
                         <form onSubmit={this.handleSubmit}>
                             <div>

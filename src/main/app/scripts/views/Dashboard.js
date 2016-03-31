@@ -13,6 +13,8 @@ const style = {
     }
 }
 
+let intervalTimer = null
+
 class DashboardView extends React.Component {
     constructor(props) {
         super(props)
@@ -36,7 +38,7 @@ class DashboardView extends React.Component {
             fetched = true
         }
 
-        setInterval(() => {
+        intervalTimer = setInterval(() => {
             this.setState({date: getWelcomeDate()})
         }, 1000)
     }
@@ -51,6 +53,10 @@ class DashboardView extends React.Component {
                 events: {total: nextProps.stats.events.total}
             }
         })
+    }
+
+    componentWillUnmount(){
+        clearInterval(intervalTimer)
     }
 
     render() {
