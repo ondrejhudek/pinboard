@@ -74,6 +74,22 @@ a {
 }
 
 /**
+ * Page not found
+ */
+.card-404 {
+    margin: 50px auto 0;
+    padding: 10px 50px;
+    max-width: 600px;
+    height: 500px;
+    background: #f9a818 url('../images/404.gif') no-repeat 50% 10% !important;
+    text-align: center;
+
+    .button-back {
+        margin-top: 430px;
+    }
+}
+
+/**
  * Browsehappy
  */
 .browsehappy {

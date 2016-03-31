@@ -15,7 +15,7 @@ export const API_EVENTS = API_ENDPOINT + '/events'
 export const API_HEADER = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
 
 /** GLOBAL VARIABLES **/
-export const __DEBUG = true
+export const __DEBUG = false
 export const __ENV = 'dev'
 
 /** GOOGLE RECAPTCHA **/

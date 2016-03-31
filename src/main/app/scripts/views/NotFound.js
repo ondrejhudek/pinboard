@@ -1,16 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Card, FlatButton } from 'material-ui'
+import { Card, RaisedButton } from 'material-ui'
+import BackIcon from 'material-ui/lib/svg-icons/navigation/arrow-back'
 
 class NotFoundView extends React.Component {
     render() {
         return (
-            <Card className="state-card">
-                <h1>Error 404</h1>
-                <h2>Page not found!</h2>
-                <Link to="/">
-                    <FlatButton label="Back to home" secondary={true}/>
-                </Link>
+            <Card className="card-404">
+                <div className="button-back">
+                    <Link to="/">
+                        <RaisedButton label="Back to home" icon={<BackIcon/>}/>
+                    </Link>
+                </div>
             </Card>
         )
     }
