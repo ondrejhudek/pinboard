@@ -1,6 +1,4 @@
 # Pinboard
-> Pin your life to one place
-
 Pin notes, todo lists and all events to your pinboard!
 
 ## Getting started
