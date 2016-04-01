@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
             <LeftNav open={this.state.open} className="sidebar">
                 <header>
                     <h1>
-                        <FontAwesome name="hand-peace-o"/> hudyapp
+                        <FontAwesome name="thumb-tack" className="app-icon"/> pinboard
                         <small>beta</small>
                     </h1>
                 </header>

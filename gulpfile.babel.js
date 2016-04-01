@@ -106,7 +106,7 @@ gulp.task('styles', () => {
     return sass(PATH.appStyles, {
         style: 'expanded'
     })
-        .pipe(autoprefixer('last 1 version'))
+        .pipe(autoprefixer())
         .pipe(gulp.dest(PATH.outputStyles))
         .pipe(size())
 })

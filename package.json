@@ -1,7 +1,7 @@
 {
-  "name": "HudyApp",
+  "name": "Pinboard",
   "version": "1.0.0",
-  "description": "React application for diploma thesis",
+  "description": "Pin notes, todo lists and all events to your pinboard!",
   "private": true,
   "dependencies": {
     "body-parser": "^1.15.0",
