@@ -6,10 +6,6 @@ import BackIcon from 'material-ui/lib/svg-icons/navigation/arrow-back'
 import auth from '../services/auth/login'
 
 class Logout extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     componentDidMount() {
         auth.logout()
     }
@@ -25,10 +21,6 @@ class Logout extends React.Component {
             </Card>
         )
     }
-}
-
-Logout.contextTypes = {
-    router: React.PropTypes.object.isRequired
 }
 
 export default Logout
