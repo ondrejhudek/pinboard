@@ -2,7 +2,7 @@
 Pin notes, todo lists and all events to your pinboard!
 
 ## Getting started
-Use `git clone` to clone the project
+Clone the project
 
 ## Installation
 ```
