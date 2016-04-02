@@ -3,15 +3,13 @@ import 'isomorphic-fetch'
 import { API_EVENTS, API_HEADER } from '../../../../../../config'
 import auth from '../../services/auth/login'
 
-const USER_ID = auth.getUserId()
-
 export default {
     fetchEvents() {
         return new Promise((resolve, reject) => {
             return fetch(API_EVENTS, {
                 method: 'POST',
                 headers: API_HEADER,
-                body: JSON.stringify({event: 'GET', data: {userId: USER_ID}})
+                body: JSON.stringify({event: 'GET', data: {userId: auth.getUserId()}})
             })
                 .then(response => response.ok ? response.json() : response.json().then(err => Promise.reject(err)))
                 .then(json => resolve(json))
@@ -24,10 +22,10 @@ export default {
             return fetch(API_EVENTS, {
                 method: 'POST',
                 headers: API_HEADER,
-                body: JSON.stringify({event: 'CREATE', data: {userId: USER_ID, event}})
+                body: JSON.stringify({event: 'CREATE', data: {userId: auth.getUserId(), event}})
             })
                 .then(response => response.ok ? response.json() : response.json().then(err => Promise.reject(err)))
-                .then(json => resolve({id: json, userId: USER_ID}))
+                .then(json => resolve({id: json, userId: auth.getUserId()}))
                 .catch(err => reject(err))
         })
     },
