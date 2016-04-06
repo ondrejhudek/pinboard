@@ -10,4 +10,4 @@ const eventSchema = new Schema({
     location: String
 })
 
-export const Event = mongoose.model('Event', eventSchema, 'Events')
+export const Event = mongoose.model('Event', eventSchema)

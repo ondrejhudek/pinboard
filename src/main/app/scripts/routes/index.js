@@ -13,7 +13,7 @@ import TodoView from '../views/Todo'
 import CalendarView from '../views/Calendar'
 import SettingsView from '../views/Settings'
 import NotFoundView from '../views/NotFound'
-import LogoutComponent from '../views/Logout'
+import LogoutView from '../views/Logout'
 
 function requireAuth(nextState, replace) {
     if (!auth.loggedIn()) {
@@ -36,7 +36,7 @@ export default (
     <Route path='/' component={Layout}>
         <IndexRoute component={DashboardView} onEnter={requireAuth}/>
         <Route path='signin' component={HomeView} onEnter={notRequireAuth}/>
-        <Route path="signout" component={LogoutComponent}/>
+        <Route path="signout" component={LogoutView}/>
         <Route path='lost-password' component={LostPasswordView} onEnter={notRequireAuth}/>
         <Route path='dashboard' component={DashboardView} onEnter={requireAuth}/>
         <Route path='note' component={NoteView} onEnter={requireAuth}/>

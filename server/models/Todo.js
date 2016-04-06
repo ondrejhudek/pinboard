@@ -6,4 +6,4 @@ const todoSchema = new Schema({
     todos: Array
 })
 
-export const Todo = mongoose.model('Todo', todoSchema, 'Todos')
+export const Todo = mongoose.model('Todo', todoSchema)

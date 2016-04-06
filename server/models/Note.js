@@ -7,4 +7,4 @@ const noteSchema = new Schema({
     body: String
 })
 
-export const Note = mongoose.model('Note', noteSchema, 'Notes')
+export const Note = mongoose.model('Note', noteSchema)
