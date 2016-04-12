@@ -9,7 +9,7 @@ const style = {
 }
 
 const TodoListItem = ({ text, completed, handleToggle, handleRemove }) => (
-    <ListItem primaryText={text} innerDivStyle={style.listItem} leftCheckbox={<Checkbox checked={completed} onClick={handleToggle}/>}
+    <ListItem primaryText={text} innerDivStyle={style.listItem} className={(completed) ? "toggled" : ""} leftCheckbox={<Checkbox checked={completed} onClick={handleToggle}/>}
               rightIconButton={<RemoveIcon onClick={handleRemove} className="item-removeButton" hoverColor="#E91E63"/>}/>
 )
 

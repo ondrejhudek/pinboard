@@ -25,8 +25,6 @@ const finalCreateStore = compose(
 const store = finalCreateStore(rootReducer)
 middleware.listenForReplays(store)
 
-if (auth.loggedIn()) {
-    store.dispatch(getUser())
-}
-
+if (auth.loggedIn()) store.dispatch(getUser())
+    
 export default store

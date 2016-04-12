@@ -31,6 +31,12 @@
         border-radius: 2px;
     }
 
+    .toggled {
+        color: #aaa !important;
+        font-style: italic;
+        text-decoration: line-through;
+    }
+
     .list-empty {
         display: none;
         margin: 12px 0 25px;
